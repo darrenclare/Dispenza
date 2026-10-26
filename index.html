@@ -11,83 +11,78 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0f0d1a; --bg2:#17142a; --card:#1d1934; --line:#2c2750;
-  --text:#ece8f6; --muted:#9c96b8; --gold:#e8c27a; --gold-soft:rgba(232,194,122,.14);
-  --violet:#8e7bd8; --nav-h:64px;
-}
+:root{--bg:#0f0d1a;--bg2:#17142a;--card:#1d1934;--line:#2c2750;--text:#ece8f6;--muted:#9c96b8;--gold:#e8c27a;--gold-soft:rgba(232,194,122,.14);--ok:#7fd1a3;--bad:#e88a8a;--nav-h:64px}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow:hidden}
 h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-
-/* Views */
+a{color:var(--gold)}
 .view{position:absolute;inset:0 0 calc(var(--nav-h) + env(safe-area-inset-bottom)) 0;display:none}
 .view.active{display:block}
-
-/* Feed */
-#feed{height:100%;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none}
-#feed::-webkit-scrollbar{display:none}
-.slide{height:100%;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;padding:24px 20px;
-  background:radial-gradient(120% 80% at 50% 0%, var(--bg2) 0%, var(--bg) 70%)}
-.card{width:100%;max-width:440px;display:flex;flex-direction:column;gap:20px}
-.tag{align-self:flex-start;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:var(--gold-soft);padding:6px 10px;border-radius:99px}
-.card h2{font-size:clamp(28px,8vw,38px);line-height:1.15}
-.card p{font-size:17px;line-height:1.6;color:#d6d1e8}
-.try{border-left:2px solid var(--gold);padding:10px 14px;background:rgba(255,255,255,.03);border-radius:0 10px 10px 0;font-size:15px;line-height:1.5;color:var(--text)}
-.try b{color:var(--gold);font-weight:600;display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
-.counter{font-size:13px;color:var(--muted)}
-.hint{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:12px;color:var(--muted);opacity:.7;pointer-events:none}
-.done-slide h2{text-align:center}.done-slide p{text-align:center}
-
-/* Practice list */
-.pad{height:100%;overflow-y:auto;padding:28px 20px 40px}
+.pad{height:100%;overflow-y:auto;padding:calc(24px + env(safe-area-inset-top)) 20px 40px}
 .wrap{max-width:480px;margin:0 auto}
 .pad h1{font-size:30px;margin-bottom:6px}
 .sub{color:var(--muted);font-size:15px;margin-bottom:22px;line-height:1.5}
-.p-item{width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.p-item h3{font-size:19px;margin-bottom:4px}
-.p-item span{font-size:14px;color:var(--muted)}
-.p-item .min{color:var(--gold);font-size:13px;white-space:nowrap}
-.p-item .tick{color:var(--gold)}
-
-/* Player */
-#player{position:fixed;inset:0;background:var(--bg);z-index:20;display:none;flex-direction:column;align-items:center;justify-content:center;padding:28px 24px calc(28px + env(safe-area-inset-bottom))}
-#player.open{display:flex}
-#closeP{position:absolute;top:calc(16px + env(safe-area-inset-top));right:16px;font-size:26px;color:var(--muted);padding:8px}
-.ring{position:relative;width:200px;height:200px;margin-bottom:28px}
-.ring svg{transform:rotate(-90deg)}
-.ring .t{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Fraunces,serif;font-size:40px}
-.orb{position:absolute;inset:40px;border-radius:50%;background:radial-gradient(circle,var(--gold-soft),transparent 70%);animation:breathe 10s ease-in-out infinite}
-@keyframes breathe{0%,100%{transform:scale(.8);opacity:.5}50%{transform:scale(1.15);opacity:1}}
-#pTitle{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-#pStep{font-size:20px;line-height:1.55;text-align:center;max-width:420px;min-height:7.5em;font-family:Fraunces,serif;font-weight:400}
-#pStepNum{color:var(--muted);font-size:13px;margin:14px 0 24px}
-.ctrls{display:flex;gap:12px}
-.btn{padding:14px 26px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-weight:500}
+.label{font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin:22px 0 10px}
+.btn{display:inline-block;padding:14px 24px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-weight:500;text-align:center;text-decoration:none;color:var(--text)}
 .btn.gold{background:var(--gold);color:#1a1530;border-color:var(--gold)}
+.btn.full{display:block;width:100%}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:12px}
+.tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:99px;background:var(--gold-soft);color:var(--gold)}
 
-/* Progress */
-.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 10px;text-align:center}
-.stat b{display:block;font-family:Fraunces,serif;font-size:30px;color:var(--gold)}
-.stat span{font-size:12px;color:var(--muted)}
-.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:10px 0 24px}
-.day{aspect-ratio:1;border-radius:8px;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted)}
-.day.on{background:var(--gold);color:#1a1530;border-color:var(--gold);font-weight:600}
-.label{font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
-.reset{margin-top:28px;font-size:13px;color:var(--muted);text-decoration:underline}
+/* Today */
+.hero{background:radial-gradient(120% 100% at 0% 0%,#2a2350 0%,var(--card) 60%);border:1px solid var(--line);border-radius:22px;padding:22px;margin-bottom:14px}
+.hero h2{font-size:26px;margin:10px 0 6px;line-height:1.2}
+.hero p{color:var(--muted);font-size:15px;margin-bottom:18px;line-height:1.5}
+.plan{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;font-size:14px}
+.plan div{display:flex;justify-content:space-between;color:#d6d1e8}
+.plan span{color:var(--muted)}
+.live{border-left:2px solid var(--gold);padding:12px 14px;background:rgba(255,255,255,.03);border-radius:0 12px 12px 0;font-size:15px;line-height:1.5}
+.live b{display:block;color:var(--gold);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
 
-/* Nav */
-nav{position:fixed;left:0;right:0;bottom:0;height:calc(var(--nav-h) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:rgba(15,13,26,.92);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;z-index:10}
-nav button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:12px;color:var(--muted)}
-nav button.active{color:var(--gold)}
-nav svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
+/* Paths */
+.path-h{display:flex;justify-content:space-between;align-items:flex-end;margin:24px 0 8px}
+.path-h h3{font-size:21px}
+.path-h small{color:var(--muted);font-size:13px}
+.bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:12px}
+.bar i{display:block;height:100%;border-radius:99px}
+.l-item{width:100%;text-align:left;display:flex;align-items:center;gap:14px;padding:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:8px}
+.l-item.locked{opacity:.45}
+.l-num{width:34px;height:34px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;border:1px solid var(--line)}
+.l-item.done .l-num{background:var(--gold);color:#1a1530;border-color:var(--gold)}
+.l-item.next .l-num{border-color:var(--gold);color:var(--gold)}
+.l-item h4{font-size:16px;font-weight:600;margin-bottom:2px}
+.l-item p{font-size:13px;color:var(--muted)}
+
+/* Session player */
+#S{position:fixed;inset:0;background:var(--bg);z-index:20;display:none;flex-direction:column;padding:calc(14px + env(safe-area-inset-top)) 20px calc(18px + env(safe-area-inset-bottom))}
+#S.open{display:flex}
+.s-top{display:flex;align-items:center;gap:14px;max-width:480px;width:100%;margin:0 auto}
+#sX{font-size:26px;color:var(--muted);padding:4px 8px}
+.s-prog{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.s-prog i{display:block;height:100%;background:var(--gold);border-radius:99px;transition:width .3s}
+#sBody{flex:1;overflow-y:auto;display:flex;flex-direction:column;justify-content:center;max-width:480px;width:100%;margin:0 auto;padding:20px 0}
+#sBody .kind{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+#sBody h2{font-size:clamp(26px,7.5vw,34px);line-height:1.18;margin-bottom:18px}
+#sBody p.txt{font-size:18px;line-height:1.62;color:#d9d4ea}
+.q{font-family:Fraunces,serif;font-size:24px;line-height:1.3;margin-bottom:22px}
+.opt{width:100%;text-align:left;padding:16px 18px;border:1px solid var(--line);background:var(--card);border-radius:14px;margin-bottom:10px;font-size:16px;line-height:1.4}
+.opt.right{border-color:var(--ok);background:rgba(127,209,163,.12)}
+.opt.wrong{border-color:var(--bad);background:rgba(232,138,138,.12)}
+.why{margin-top:8px;font-size:15px;line-height:1.5;color:var(--muted)}
+.why b{color:var(--text)}
+.s-foot{max-width:480px;width:100%;margin:0 auto}
+.s-foot .btn{width:100%}
+.s-foot .btn:disabled{opacity:.35}
+.deeper{margin-top:18px;font-size:14px;color:var(--muted);line-height:1.5}
+.deeper b{color:var(--gold);font-weight:500}
+.big-done{text-align:center}
+.big-done .ring{font-size:56px;margin-bottom:10px}
+
 /* Watch */
 .v-item{width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:14px;display:block}
 .v-thumb{position:relative;aspect-ratio:16/9;background:#000 center/cover no-repeat}
-.v-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(15,13,26,.7))}
-.v-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(232,194,122,.92);display:flex;align-items:center;justify-content:center;z-index:1}
+.v-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(232,194,122,.92);display:flex;align-items:center;justify-content:center}
 .v-play::before{content:"";border-left:16px solid #1a1530;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
 .v-body{padding:14px 16px 16px}
 .v-body h3{font-size:18px;margin-bottom:4px}
@@ -99,241 +94,537 @@ nav svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
 #vFrameWrap{width:100%;max-width:720px;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}
 #vFrameWrap iframe{width:100%;height:100%;border:0}
 #vModal .row{display:flex;gap:12px;margin-top:18px}
-.ext-link{display:block;text-align:center;margin-top:8px;color:var(--gold);font-size:14px}
-.streak-pill{position:fixed;top:calc(12px + env(safe-area-inset-top));right:14px;z-index:5;background:rgba(29,25,52,.85);border:1px solid var(--line);border-radius:99px;padding:6px 12px;font-size:13px;color:var(--gold)}
+
+/* Progress */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:8px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 8px;text-align:center}
+.stat b{display:block;font-family:Fraunces,serif;font-size:28px;color:var(--gold)}
+.stat span{font-size:12px;color:var(--muted)}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{aspect-ratio:1;border-radius:8px;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted)}
+.day.on{background:var(--gold);color:#1a1530;border-color:var(--gold);font-weight:600}
+.reset{margin-top:28px;font-size:13px;color:var(--muted);text-decoration:underline}
+
+/* Nav */
+nav{position:fixed;left:0;right:0;bottom:0;height:calc(var(--nav-h) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:rgba(15,13,26,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;z-index:10}
+nav button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:12px;color:var(--muted)}
+nav button.active{color:var(--gold)}
+nav svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
+.pill{position:fixed;top:calc(12px + env(safe-area-inset-top));right:14px;z-index:5;background:rgba(29,25,52,.9);border:1px solid var(--line);border-radius:99px;padding:6px 12px;font-size:13px;color:var(--gold)}
 </style>
 </head>
 <body>
+<div class="pill" id="pill">🔥 0</div>
 
-<div class="streak-pill" id="pill">0 day streak</div>
-
-<section class="view active" id="v-learn"><div id="feed"></div></section>
-
-<section class="view" id="v-practice"><div class="pad"><div class="wrap">
-  <h1>Practice</h1>
-  <p class="sub">Short sessions to shift your state. Find somewhere quiet and let the timer guide you.</p>
-  <div id="pList"></div>
+<section class="view active" id="v-today"><div class="pad"><div class="wrap" id="todayWrap"></div></div></section>
+<section class="view" id="v-paths"><div class="pad"><div class="wrap">
+  <h1>Paths</h1><p class="sub">Lessons unlock in order. Tap a finished lesson to read it again.</p>
+  <div id="pathsWrap"></div>
 </div></div></section>
-
 <section class="view" id="v-watch"><div class="pad"><div class="wrap">
-  <h1>Watch</h1>
-  <p class="sub">Dr Joe in his own words, from his official channel and interviews. Plays here via YouTube.</p>
+  <h1>Watch</h1><p class="sub">Dr Joe in his own words, from his official channel and interviews. Plays here via YouTube.</p>
   <div id="vList"></div>
-  <a class="ext-link" href="https://www.youtube.com/channel/UCSTTPGPS-lm0YVb4DMJ3lTA" target="_blank" rel="noopener">More on his official YouTube channel →</a>
+  <a class="btn full" href="https://www.youtube.com/channel/UCSTTPGPS-lm0YVb4DMJ3lTA" target="_blank" rel="noopener">More on his official channel →</a>
 </div></div></section>
-
-<div id="vModal">
-  <div id="vFrameWrap"></div>
-  <div class="row"><a class="btn" id="vExt" target="_blank" rel="noopener">Open in YouTube</a><button class="btn gold" id="vClose">Close</button></div>
-</div>
-
 <section class="view" id="v-progress"><div class="pad"><div class="wrap">
-  <h1>Progress</h1>
-  <p class="sub">Small daily reps beat occasional big sessions.</p>
+  <h1>Progress</h1><p class="sub">Short daily reps, reviewed just before you'd forget.</p>
   <div class="stat-row">
     <div class="stat"><b id="sStreak">0</b><span>Day streak</span></div>
-    <div class="stat"><b id="sCards">0</b><span>Ideas learned</span></div>
-    <div class="stat"><b id="sPrac">0</b><span>Practices done</span></div>
+    <div class="stat"><b id="sLessons">0</b><span>Lessons done</span></div>
+    <div class="stat"><b id="sDue">0</b><span>Reviews due</span></div>
   </div>
-  <div class="label">Last 14 days</div>
-  <div class="days" id="days"></div>
+  <div class="label">Mastery</div><div id="mastery"></div>
+  <div class="label">Last 14 days</div><div class="days" id="days"></div>
   <div class="label">Best streak: <span id="sBest">0</span> days</div>
   <button class="reset" id="resetBtn">Reset my progress</button>
 </div></div></section>
 
-<div id="player">
-  <button id="closeP" aria-label="Close">×</button>
-  <div id="pTitle"></div>
-  <div class="ring">
-    <div class="orb"></div>
-    <svg width="200" height="200"><circle cx="100" cy="100" r="92" stroke="#2c2750" stroke-width="4" fill="none"/>
-      <circle id="arc" cx="100" cy="100" r="92" stroke="#e8c27a" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="578" stroke-dashoffset="578"/></svg>
-    <div class="t" id="pTime">0:00</div>
-  </div>
-  <div id="pStep"></div>
-  <div id="pStepNum"></div>
-  <div class="ctrls"><button class="btn" id="pPause">Pause</button><button class="btn gold" id="pNext">Next</button></div>
+<div id="S">
+  <div class="s-top"><button id="sX" aria-label="Close">×</button><div class="s-prog"><i id="sBar"></i></div></div>
+  <div id="sBody"></div>
+  <div class="s-foot"><button class="btn gold" id="sNext">Continue</button></div>
 </div>
 
+<div id="vModal"><div id="vFrameWrap"></div>
+  <div class="row"><a class="btn" id="vExt" target="_blank" rel="noopener">Open in YouTube</a><button class="btn gold" id="vClose">Close</button></div></div>
+
 <nav>
-  <button class="active" data-v="learn"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M9 8h6M9 12h6"/></svg>Learn</button>
-  <button data-v="practice"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>Practice</button>
+  <button class="active" data-v="today"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg>Today</button>
+  <button data-v="paths"><svg viewBox="0 0 24 24"><path d="M6 3v18M6 7h9l-2 3 2 3H6"/></svg>Paths</button>
   <button data-v="watch"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>Watch</button>
   <button data-v="progress"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Progress</button>
 </nav>
 
 <script>
-/* ---------- Content (written in our own words, summarising ideas) ---------- */
-const CARDS = [
- {c:"Foundations",t:"Inner pattern, outer life",b:"A central idea in Dispenza's work: the way you habitually think, act and feel shapes the life you keep experiencing. Change the inner pattern and the outer life has room to change with it.",y:"Name one thought you've had every single day this week."},
- {c:"Foundations",t:"Most of today is a rerun",b:"Same thoughts lead to the same choices. Same choices lead to the same behaviours, the same experiences and the same emotions, which then produce the same thoughts again. Most days are a repeat of yesterday.",y:"What part of today was identical to yesterday?"},
- {c:"Foundations",t:"The thinking–feeling loop",b:"A thought creates a feeling. The feeling then prompts more thoughts that match it. Round and round. Breaking the loop starts with catching it while it's running.",y:"Next time you feel low, ask: what thought came just before this?"},
- {c:"Emotion",t:"Living in the past",b:"Every time you relive an old hurt, the body responds as if it's happening now. Feel the same past emotions every day and, in a sense, you keep living in the past.",y:"Which old event do you replay most often?"},
- {c:"Emotion",t:"Memorised emotions",b:"Feel an emotion for a few hours and it's a mood. Keep it for weeks and it's a temperament. Hold it for years and it becomes part of your personality. You end up identifying with a feeling you only learned.",y:"Finish this sentence honestly: 'I'm the kind of person who always feels…'"},
- {c:"Body",t:"The body learns the program",b:"Repeat an emotional state often enough and the body learns it so well it runs automatically, before you've consciously chosen anything. That's why change can feel physically uncomfortable.",y:"Notice one reaction today that happened before you 'decided' it."},
- {c:"Body",t:"Survival mode",b:"Under stress, attention narrows onto three things: your body, your surroundings and time. It's great for emergencies and terrible as a way of living, because it keeps you focused on what could go wrong.",y:"Right now, which of the three is grabbing your attention most?"},
- {c:"Body",t:"Beyond body, place and time",b:"In his meditations, the aim is to let go of thinking about your body, where you are and what time it is. As attention moves away from the familiar, you stop rehearsing the old self.",y:"Close your eyes for 30 seconds and notice the space around you instead of your body."},
- {c:"Mind",t:"The present is the doorway",b:"The past is memory and the future you predict is usually built from that memory. Only in the present moment can you choose something genuinely new.",y:"Feel your feet on the floor. That's the present. Start there."},
- {c:"Mind",t:"Step into the unknown",b:"The familiar feels safe even when it's bad for you. Real change means stepping into uncertainty. Discomfort is often a sign you're leaving the old self, not a sign that something's wrong.",y:"What feels uncomfortable about the change you want?"},
- {c:"Mind",t:"Watch for the old self",b:"You can't change a pattern you can't see. Becoming aware of how you usually think, speak and react is the first step. Self-observation is the work.",y:"Pick one habit to simply observe today. Don't try to fix it."},
- {c:"Mind",t:"Wire together, fire together",b:"An idea from neuroscience: nerve cells that are repeatedly activated together form stronger connections. Repeat a thought often enough and it becomes a groove the mind falls into easily.",y:"What groove do you want to carve deeper?"},
- {c:"Mind",t:"Prune the old, grow the new",b:"Connections you stop using tend to weaken. Every time you decline the old reaction, you're starving that circuit and feeding a new one.",y:"Choose one old reaction you'll decline today."},
- {c:"Future Self",t:"Who are you becoming?",b:"Before you meditate, get specific. How does your future self think? How do they act and respond under pressure? How do they feel when they wake up? Vague intentions produce vague change.",y:"Write three words that describe your future self."},
- {c:"Future Self",t:"Mental rehearsal",b:"Research on mental practice, often from sport, suggests that vividly imagining an action can prime the brain for it. Rehearse the new you in your mind and the brain starts to treat it as familiar.",y:"Picture yourself handling tomorrow's hardest moment as your future self."},
- {c:"Future Self",t:"Thought plus feeling",b:"A clear intention is half of it. The other half is feeling the emotion of it now. In his teaching, thought without feeling barely moves anything. Together they form a new state of being.",y:"Think of your goal. Now find the feeling you'd have if it were done."},
- {c:"Future Self",t:"Feel it before it happens",b:"We usually wait for something good to happen before we feel grateful or joyful. This practice reverses that: feel the elevated emotion first, as though it has already happened.",y:"Spend 60 seconds feeling as if your intention has already arrived."},
- {c:"Emotion",t:"Gratitude as receiving",b:"Gratitude is the emotion that naturally follows receiving something. Feeling it in advance tells you, and your body, that you've already received.",y:"Say 'thank you' for something that hasn't happened yet."},
- {c:"Practice",t:"Heart and breath",b:"Slow, steady breathing combined with a warm feeling like appreciation is linked in research to a more even heart rhythm, often called coherence. It's a simple way into a calmer, elevated state.",y:"Breathe in for 5, out for 5, with your attention on your chest."},
- {c:"Practice",t:"Slowing the busy mind",b:"Everyday thinking runs fast and analytical. In meditation, brain activity tends to slow, the inner critic gets quieter, and it becomes easier to take on a new idea of yourself.",y:"Try three slow breaths before your next scroll."},
- {c:"Practice",t:"Let go of the how",b:"Trying to control how something arrives is often the old self's anxiety in disguise. Set the intention, feel it, then release the details. Outcomes often show up in unexpected ways.",y:"Notice where you're trying to force a 'how'."},
- {c:"Practice",t:"Don't hunt for proof",b:"Constantly checking whether it's working pulls you back into analysis and doubt, the old state. Keep the state; let the evidence come when it comes.",y:"Today, practise without checking for results."},
- {c:"Practice",t:"Get up as the new self",b:"Meditation is the rehearsal and the day is the performance. The real test is whether you can carry that elevated state into the first conversation, the first email, the first frustration.",y:"Choose one moment today to deliberately act as your future self."},
- {c:"Practice",t:"Small daily reps",b:"Change comes from consistency more than intensity. A few minutes every day trains the mind and body far better than an occasional big session.",y:"Keep your streak alive: one card and one practice a day."}
+/* Lesson content — all written in our own words, summarising ideas.
+   No passages from copyrighted books. "Go deeper" points to the source. */
+const PATHS = {
+  D:{name:"Dispenza",sub:"Breaking the habit of being yourself",col:"#e8c27a"},
+  N:{name:"Neville",sub:"The law of assumption",col:"#9fb7f0"},
+  B:{name:"Bridge",sub:"Where the two teachings meet",col:"#c7a3e8"}
+};
+
+const LESSONS = [
+/* ================= DISPENZA ================= */
+{id:"d1",p:"D",t:"You are a habit",skill:"Spot the loop running on autopilot",
+ cards:[
+  ["The 95% idea","Dispenza often says that by middle age, most of who we are runs on a set of memorised programs. Thoughts, reactions, behaviours, feelings, all running automatically."],
+  ["The loop","Same thoughts lead to the same choices. Same choices lead to the same actions. Same actions create the same experiences, which produce the same emotions. And those emotions drive the same thoughts again."],
+  ["Why it matters","If the loop runs unchanged, tomorrow is a rerun of today. A new future can't come from the same personality that made your current reality."],
+  ["The key reframe","Your personality creates your personal reality. To change the reality, change the personality: how you think, act and feel."],
+  ["Where it starts","You can't change a loop you can't see. Step one is noticing it while it's running, without judging it."]
+ ],
+ qs:[
+  ["In the loop, what do the same emotions lead back to?",["The same thoughts","New experiences","Better choices"],0,"Emotions drive matching thoughts, which closes the loop."],
+  ["According to Dispenza, what creates your personal reality?",["Your personality","Your luck","Your environment alone"],0,"Personality (how you think, act and feel) creates personal reality."],
+  ["What's the first step in breaking the loop?",["Noticing it while it runs","Forcing positive thoughts","Changing your job"],0,"Awareness comes first. You can't change what you can't see."]
+ ],
+ live:"Catch one moment today where you reacted exactly as you always do. Just notice it.",
+ deeper:"Breaking the Habit of Being Yourself — the opening chapters on personality and personal reality."},
+
+{id:"d2",p:"D",t:"Memorised emotions",skill:"Notice when a feeling has become your identity",
+ cards:[
+  ["Feeling as a chemical","In his teaching, every emotion is a chemical signal that tells the body what the mind has decided. Feel it often enough and the body starts expecting it."],
+  ["Mood, temperament, personality","A feeling that lasts hours is a mood. Kept for weeks, it becomes a temperament. Held for years, it becomes a personality trait."],
+  ["The body becomes the mind","Repeat an emotion long enough and the body learns it so well it runs it automatically. The body has, in his phrase, become the mind."],
+  ["Addicted to the familiar","The body can crave its familiar emotions, even painful ones. You'll unconsciously find thoughts and situations that reproduce them."],
+  ["The tell","When you say 'I've always been this way', that's often a memorised emotion talking, not a fixed fact about you."]
+ ],
+ qs:[
+  ["A feeling held for years becomes…",["A personality trait","A mood","A temperament"],0,"Mood (hours) → temperament (weeks) → personality trait (years)."],
+  ["What does 'the body becomes the mind' mean?",["The body runs the emotion automatically","You think with your body","Exercise improves thinking"],0,"The body has memorised the state and runs it without conscious choice."],
+  ["Why might someone keep recreating a painful feeling?",["The body craves the familiar emotion","They enjoy pain","It's genetic"],0,"Familiar emotional chemistry feels like 'me', even when it hurts."]
+ ],
+ live:"Finish this honestly: 'I'm the kind of person who always feels…' That's your memorised emotion.",
+ deeper:"Breaking the Habit of Being Yourself — chapters on the body as the unconscious mind."},
+
+{id:"d3",p:"D",t:"Survival mode",skill:"Recognise stress narrowing your world",
+ cards:[
+  ["Built for emergencies","The stress response evolved for short threats. It narrows attention and floods the body with energy to fight or flee."],
+  ["The three things","In survival mode, attention locks onto three things: your body, your environment and time. That means 'Am I OK? What's happening around me? How long have I got?'"],
+  ["The problem","Most modern stress never switches off. Living in that state keeps you focused on what could go wrong, and keeps you predictable."],
+  ["Materialist mode","When you're consumed by body, things and time, you're trying to change matter with matter. He says that's the hardest way to create anything."],
+  ["The way out","Change starts by withdrawing attention from those three things, which is exactly what his meditation trains."]
+ ],
+ qs:[
+  ["Survival mode narrows attention to which three things?",["Body, environment, time","Past, present, future","Mind, heart, gut"],0,"Body, environment and time: the 'three bigs' of stress."],
+  ["Why is chronic survival mode a problem for change?",["It keeps you focused on what could go wrong","It makes you too relaxed","It improves focus"],0,"It locks you into predictable, threat-focused patterns."],
+  ["What's the way out, according to Dispenza?",["Withdrawing attention from body, environment and time","Working harder","Avoiding all stress"],0,"Taking attention off the three bigs is the core of his meditation."]
+ ],
+ live:"Next time you're stressed, ask: which of the three has my attention: body, place or time?",
+ deeper:"Breaking the Habit of Being Yourself — chapters on stress and survival."},
+
+{id:"d4",p:"D",t:"The present moment",skill:"Use the present as the only place change can happen",
+ cards:[
+  ["Predictable past, predictable future","Most of us live in the past (memory) or the future (predictions built from memory). Either way, we're living in the known."],
+  ["The generous present","Dispenza calls the present moment generous because it's the only place where new possibilities exist. Everything else is a rerun."],
+  ["Why it's hard","The body is used to anticipating the future and reliving the past. Settling into now can feel uncomfortable, and that's normal."],
+  ["The skill","Every time attention drifts to a familiar worry or memory, you notice and come back. Each return is one rep."],
+  ["The payoff","When you're truly present, you're no longer reaffirming the old self. That's when something new has room to show up."]
+ ],
+ qs:[
+  ["Why does Dispenza call the present moment 'generous'?",["It's where new possibilities exist","It lasts longer","It feels nice"],0,"Only the present holds the unknown, meaning new possibilities."],
+  ["Predicting the future usually relies on…",["Memories of the past","Pure imagination","Intuition"],0,"Predictions are built from memory, so they keep you in the known."],
+  ["What counts as 'one rep' of this skill?",["Noticing drift and returning to now","Meditating for an hour","Never thinking of the past"],0,"Each return to the present is the training."]
+ ],
+ live:"Three times today, stop and feel your feet. That's the present moment.",
+ deeper:"Becoming Supernatural — the chapter on the present moment."},
+
+{id:"d5",p:"D",t:"Becoming no one",skill:"Understand what you're letting go of in meditation",
+ cards:[
+  ["The phrase","In his meditations he invites you to become no body, no one, no thing, nowhere, in no time. It sounds strange, but it's precise."],
+  ["What it means","You stop identifying with your body, your name and roles, your possessions, your location and your schedule. All the things that define the old self."],
+  ["Why do it","While you're being somebody, you keep reaffirming that somebody. Drop the identity for a while and the old program isn't being fed."],
+  ["Pure awareness","What's left is awareness itself. From there, he teaches, you're free to create a new self rather than repeat the old one."],
+  ["Practically","It's not forcing a blank mind. It's repeatedly moving attention off the familiar and into space, darkness and openness."]
+ ],
+ qs:[
+  ["'Becoming no one' means dropping identification with…",["Your name, roles and self-image","Your breath","Your goals forever"],0,"You let go of everything that defines the old self, temporarily."],
+  ["Why let go of the identity during meditation?",["So the old self isn't being reaffirmed","To forget your life","To fall asleep"],0,"Being 'somebody' keeps feeding that somebody's program."],
+  ["What's the practical skill?",["Moving attention off the familiar into space","Forcing a blank mind","Thinking hard about goals"],0,"Gently redirecting attention, not forcing emptiness."]
+ ],
+ live:"For 60 seconds, put your attention on the space around your body instead of your body.",
+ deeper:"Breaking the Habit of Being Yourself — the step-by-step meditation weeks; Becoming Supernatural."},
+
+{id:"d6",p:"D",t:"Mental rehearsal",skill:"Build a future self the brain treats as familiar",
+ cards:[
+  ["Neurons that fire together","A well-known idea in neuroscience: nerve cells that repeatedly activate together strengthen their connections. Repetition carves grooves."],
+  ["Rehearsal works","Studies of mental practice, often in sport and music, show that vividly imagining an action can change the brain in ways similar to doing it."],
+  ["Install the future","Dispenza applies this to identity. Rehearse how your future self thinks, acts and feels, and the brain starts treating that self as familiar."],
+  ["Be specific","Vague goals create vague rehearsal. Who is this person? How do they respond to a hard email? How do they walk into a room?"],
+  ["The brain ahead of the event","The aim is for your brain to look like the future has already happened, so when the moment comes you act from that self automatically."]
+ ],
+ qs:[
+  ["'Neurons that fire together…'",["…wire together","…tire together","…expire together"],0,"Repeated co-activation strengthens connections."],
+  ["What does mental rehearsal aim to do?",["Make the future self familiar to the brain","Predict the future","Replace action entirely"],0,"Rehearsal installs the circuitry ahead of the experience."],
+  ["What makes rehearsal effective?",["Specific detail of thoughts, actions and feelings","Saying the goal fast","Doing it once"],0,"Specific, repeated, detailed rehearsal."]
+ ],
+ live:"Pick one moment coming up today. Rehearse it for 30 seconds as your future self.",
+ deeper:"Evolve Your Brain; Breaking the Habit of Being Yourself — chapters on mental rehearsal."},
+
+{id:"d7",p:"D",t:"Elevated emotion",skill:"Feel the outcome before it arrives",
+ cards:[
+  ["Thought plus feeling","He teaches that a clear intention (thought) plus an elevated emotion (feeling) together create a new state of being. Either alone is weak."],
+  ["The usual order","Normally we wait for something to happen, then feel grateful. That keeps feelings dependent on circumstances."],
+  ["Reverse the order","Feel gratitude, joy or wholeness first, as if the outcome has already happened. The body responds to the emotion as though it's real."],
+  ["Why gratitude","Gratitude is the emotion that follows receiving. Feeling it in advance tells you, and your body, that it's already done."],
+  ["Wholeness, not lack","Trying to manifest from lack ('I need this') reinforces lack. Feeling whole first changes where you're creating from."]
+ ],
+ qs:[
+  ["A new state of being comes from…",["Clear intention plus elevated emotion","Intention alone","Emotion alone"],0,"Thought and feeling together."],
+  ["Why is gratitude especially useful?",["It's the feeling that follows receiving","It's the easiest emotion","It cancels stress"],0,"Feeling it first signals the outcome has already arrived."],
+  ["Creating from lack tends to…",["Reinforce lack","Speed things up","Be neutral"],0,"Lack is the old state, so wholeness comes first."]
+ ],
+ live:"Spend 60 seconds feeling grateful for something that hasn't happened yet.",
+ deeper:"Becoming Supernatural; Breaking the Habit of Being Yourself."},
+
+{id:"d8",p:"D",t:"Heart coherence",skill:"Use breath and the heart to reach an elevated state",
+ cards:[
+  ["What coherence is","When breathing is slow and steady, and you hold a warm emotion like appreciation, heart rhythm becomes smooth and orderly. Researchers call this heart coherence."],
+  ["The practice","Place attention on the centre of the chest. Breathe slowly, as if through the heart. Then cultivate an elevated emotion."],
+  ["Why it helps","It's a direct, physical route into the elevated state from the last lesson, instead of trying to think your way there."],
+  ["His framing","Dispenza teaches the heart as a gateway to a unified, connected state, and uses coherence heavily in his meditations."],
+  ["Honest note","Slow breathing and positive emotion having calming effects is well supported. His larger claims about the heart are his teaching. Hold them as such."]
+ ],
+ qs:[
+  ["Heart coherence involves slow breathing plus…",["An elevated emotion like appreciation","Holding your breath","Fast breathing"],0,"Steady breath plus a warm emotion."],
+  ["Where do you place attention?",["The centre of the chest","The forehead","The feet"],0,"Attention on the heart area."],
+  ["Why use the heart practice?",["It's a physical route into an elevated state","It replaces sleep","It stops thoughts permanently"],0,"Body-first access to the feeling."]
+ ],
+ live:"Before your next meal, do five slow breaths with attention on your chest.",
+ deeper:"Becoming Supernatural — chapters on the heart."},
+
+{id:"d9",p:"D",t:"Living as the new self",skill:"Carry the state into the day",
+ cards:[
+  ["Meditation is rehearsal","Sitting is practice. The day is the performance. The test is whether you can stay as the new self when life pokes you."],
+  ["Don't hunt for proof","Constantly checking 'is it working?' pulls you back into analysis, doubt and lack. That's the old self."],
+  ["Expect it unexpectedly","He teaches that outcomes often show up in ways you couldn't predict. Trying to control the how is the old self's anxiety."],
+  ["When you slip","You'll fall back into old reactions. Notice, don't punish, and return. Each return strengthens the new circuit."],
+  ["Consistency","Small daily reps beat occasional big sessions. The new self gets familiar through repetition."]
+ ],
+ qs:[
+  ["What does hunting for proof do?",["Pulls you back into doubt and lack","Speeds results","Builds faith"],0,"Checking is analysis: the old state."],
+  ["How should you respond to slipping into old reactions?",["Notice, don't punish, return","Start over from scratch","Ignore it"],0,"Each return is a rep for the new self."],
+  ["Outcomes, in his teaching, tend to come…",["In unexpected ways","Exactly as planned","Never"],0,"Let go of controlling the how."]
+ ],
+ live:"Choose one moment today to deliberately act as your future self.",
+ deeper:"Breaking the Habit of Being Yourself — the closing chapters on demonstrating the new self."},
+
+/* ================= NEVILLE ================= */
+{id:"n1",p:"N",t:"Imagination creates reality",skill:"Grasp Neville's central claim",
+ cards:[
+  ["Who he was","Neville Goddard (1905–1972) was a mystic and lecturer. His teaching centres on one idea: imagination is the creative power."],
+  ["The claim","What you imagine and accept as true about yourself tends to show up in your world. The outer world reflects your inner state."],
+  ["Imagination is not daydreaming","He means imagination you inhabit and accept as real, not idle fantasy you know is make-believe."],
+  ["You're always doing it","He taught that you're already imagining, usually worries and old stories, and your world reflects that too."],
+  ["The shift","So the question isn't whether to use imagination. It's whether you use it deliberately."]
+ ],
+ qs:[
+  ["Neville's central teaching is that…",["Imagination creates reality","Hard work creates reality","Luck creates reality"],0,"Imagination is the creative power."],
+  ["How does his 'imagination' differ from daydreaming?",["It's inhabited and accepted as real","It's more colourful","It's done at night only"],0,"Accepted as real, not idle fantasy."],
+  ["If you're not imagining deliberately, Neville says…",["You're imagining by default, often worries","Nothing happens","You're neutral"],0,"Default imagining still shapes your world."]
+ ],
+ live:"Notice what you've been imagining about your future today. Worry or desire?",
+ deeper:"Feeling Is the Secret — chapter 'Law and Its Operation'."},
+
+{id:"n2",p:"N",t:"Assumption",skill:"Assume the wish is already fulfilled",
+ cards:[
+  ["The law of assumption","What you assume to be true, and persist in assuming, hardens into fact. That's the core of his method."],
+  ["Assume, don't hope","Hoping places it in the future. Assuming says it's already so. The grammar of your inner speech matters."],
+  ["Assume a state","He talks about states: wealthy, loved, healthy. You don't chase the thing, you occupy the state of being someone who has it."],
+  ["Senses will disagree","Your senses will report the current situation. Assumption means holding the new state anyway."],
+  ["Inner speech","Notice your inner conversations. Would the person with the wish fulfilled be talking to themselves like this?"]
+ ],
+ qs:[
+  ["Assumption differs from hope because…",["It treats the wish as already true","It's more positive","It's said out loud"],0,"Hope = future; assumption = now."],
+  ["In Neville's terms, you aim to occupy…",["The state of the wish fulfilled","The object itself","Someone else's life"],0,"States, not things."],
+  ["What role do inner conversations play?",["They reveal and reinforce your assumptions","None","Only when spoken aloud"],0,"Inner speech shows what you're assuming."]
+ ],
+ live:"Catch one inner conversation today and rewrite it as your wish-fulfilled self would say it.",
+ deeper:"The Power of Awareness — chapter 'Power of Assumption'."},
+
+{id:"n3",p:"N",t:"Feeling is the secret",skill:"Why feeling matters more than thinking",
+ cards:[
+  ["The key","For Neville, thinking about a wish isn't enough. You need to feel the reality of it being fulfilled."],
+  ["Feeling impresses","He taught that feeling is what impresses an idea onto the subconscious, and what's impressed gets expressed."],
+  ["Natural feeling","Aim for the feeling that would naturally follow: relief, satisfaction, quiet 'of course'. It shouldn't be forced excitement."],
+  ["Control your feelings","He urged never entertaining feelings you don't want to experience as fact. Feelings are causes, not just effects."],
+  ["Small scene","Use a short scene that implies fulfilment, like a handshake or a congratulation, and feel it as real."]
+ ],
+ qs:[
+  ["What impresses an idea on the subconscious, per Neville?",["Feeling","Repetition of words only","Writing it down"],0,"Feeling is the secret."],
+  ["The best feeling to aim for is…",["The natural feeling of it being done","Forced excitement","Anxious wanting"],0,"Relief and satisfaction, not straining."],
+  ["Neville treats feelings as…",["Causes, not just effects","Irrelevant","Only effects"],0,"Feelings create, so guard them."]
+ ],
+ live:"Pick a wish. Find the quiet 'of course' feeling of it being done and hold it for 30 seconds.",
+ deeper:"Feeling Is the Secret — the whole book is short; read it in one sitting."},
+
+{id:"n4",p:"N",t:"SATS: the drowsy state",skill:"Use the edge of sleep to impress the feeling",
+ cards:[
+  ["The term","SATS stands for 'state akin to sleep': the drowsy, relaxed state just before you fall asleep."],
+  ["Why that state","When drowsy, effort fades and the critical mind quietens. Neville taught this is when ideas impress most easily."],
+  ["The method","Relax in bed. Construct a short scene implying the wish is fulfilled. Loop it, feeling it real, until you drift off."],
+  ["Keep it short","A single action or line, like a hug or 'congratulations!', repeated, works better than a long movie."],
+  ["Fall asleep in it","He taught the last mood you fall asleep in matters. Drift off as the person who already has it."]
+ ],
+ qs:[
+  ["SATS stands for…",["State akin to sleep","Subconscious action technique","Silent affirmation time"],0,"State akin to sleep."],
+  ["Why is the drowsy state useful?",["Effort and the critical mind quieten","You remember dreams","It's faster"],0,"Less resistance means easier impression."],
+  ["The ideal SATS scene is…",["Short and looped, implying fulfilment","A long detailed movie","A list of goals"],0,"One short scene, repeated."]
+ ],
+ live:"Tonight, choose a 5-second scene. Loop it as you drift off.",
+ deeper:"Feeling Is the Secret — chapter 'Sleep'."},
+
+{id:"n5",p:"N",t:"Think from the end",skill:"Think from the wish, not about it",
+ cards:[
+  ["From vs of","Thinking of a wish keeps it out there. Thinking from it means you're inside it, looking out at the world."],
+  ["Live in the end","Imagine from the point where the wish is fulfilled. What do you see? Who's around? What are you doing next?"],
+  ["Don't build the bridge","You don't plan how you get there. He taught that the means appear by themselves. Your job is the end."],
+  ["The test","If you're still thinking 'when it happens…', you're thinking of. If you're thinking 'now that it's done…', you're thinking from."],
+  ["Everyday practice","Through the day, return to the end and take on the mood of it being done."]
+ ],
+ qs:[
+  ["Thinking FROM the wish means…",["Being inside it, looking out","Planning steps toward it","Writing it down"],0,"Occupy the end, don't look at it."],
+  ["What about the 'how'?",["Leave it, and the means appear","Plan every step","Ask others"],0,"Neville: don't build the bridge."],
+  ["'When it happens, I'll…' is thinking…",["Of the wish","From the wish","Neutrally"],0,"'Now that it's done' is thinking from."]
+ ],
+ live:"Three times today, replace 'when it happens' with 'now that it's done…'",
+ deeper:"The Power of Awareness — chapters 'Preparing Your Place' and 'Power of Assumption'."},
+
+{id:"n6",p:"N",t:"Revision",skill:"Rewrite the day in your imagination",
+ cards:[
+  ["The idea","At the end of each day, replay events that didn't go as you wished, and re-imagine them the way you'd have liked."],
+  ["Why","Neville taught that unrevised events keep reproducing themselves. Revision stops them repeating."],
+  ["How","Relax, replay the moment, then run the new version, feeling it as real until it satisfies."],
+  ["Not denial","You're not pretending it didn't happen. You're refusing to keep imagining it, and replacing it with what you want."],
+  ["Forgiveness","He framed revision as a form of true forgiveness: you stop carrying the event forward."]
+ ],
+ qs:[
+  ["Revision means…",["Re-imagining events as you wished they went","Writing a diary","Apologising"],0,"Replay and rewrite in imagination."],
+  ["Why revise, per Neville?",["Unrevised events tend to repeat","To forget everything","To feel guilty"],0,"Revision stops repetition."],
+  ["Revision is different from denial because…",["You replace the memory, not pretend it didn't happen","It's the same","It's done at night"],0,"You stop re-imagining it and replace it."]
+ ],
+ live:"Tonight, pick one moment from today and replay it the way you wanted.",
+ deeper:"The Law and the Promise — chapter 'Turn the Wheel Backward'."},
+
+{id:"n7",p:"N",t:"Persistence",skill:"Hold the assumption when the senses disagree",
+ cards:[
+  ["The missing piece","Neville taught that most people imagine once, then drop it. Persistence is what makes an assumption harden into fact."],
+  ["Senses will test you","The current situation will keep reporting the old facts. Persistence means not letting that change your assumption."],
+  ["Return, don't strain","Persisting isn't gritting your teeth. It's calmly returning to the end every time you notice you've left it."],
+  ["Until it feels natural","Keep going until the new state feels normal: 'of course it's done'. Then the urge to keep checking fades."],
+  ["Signs of success","When you stop wanting it, because inwardly you already have it, the assumption has taken hold."]
+ ],
+ qs:[
+  ["What turns an assumption into fact, per Neville?",["Persistence","One intense session","Telling others"],0,"Persistence is the deciding factor."],
+  ["Persistence looks like…",["Calmly returning to the end","Straining harder","Checking often"],0,"Gentle, repeated return."],
+  ["A sign the assumption has taken hold:",["You no longer feel you want it","You think about it constantly","You feel anxious"],0,"Wanting fades when you inwardly have it."]
+ ],
+ live:"Each time today you notice doubt, return to the wish-fulfilled feeling. Count the returns.",
+ deeper:"The Power of Awareness — chapter 'Persistence'."},
+
+/* ================= BRIDGE ================= */
+{id:"b1",p:"B",t:"Elevated emotion vs feeling",skill:"See the common thread",unlock:5,
+ cards:[
+  ["Dispenza","Intention plus elevated emotion creates a new state of being. Feel it before it happens."],
+  ["Neville","Feeling is the secret. Feel the reality of the wish fulfilled, and what's impressed gets expressed."],
+  ["Same idea?","Both say the thought alone isn't enough. The feeling of it being done is what does the work."],
+  ["The difference","Dispenza leads with elevated emotions like gratitude, joy and wholeness. Neville leads with the natural feeling of the specific wish being done."],
+  ["Use both","Use Neville's specific scene to direct the feeling, and Dispenza's gratitude and heart focus to amplify it."]
+ ],
+ qs:[
+  ["What do both teachers agree on?",["The feeling of it being done is essential","Thought alone is enough","Feelings don't matter"],0,"Feeling is central to both."],
+  ["Dispenza's emphasis is on…",["Elevated emotions like gratitude and wholeness","Short sleep scenes","Revision"],0,"General elevated states."],
+  ["Neville's emphasis is on…",["The natural feeling of the specific wish fulfilled","Heart coherence","Brain waves"],0,"Specific, natural feeling."]
+ ],
+ live:"Combine them: a 5-second Neville scene, then 3 heart breaths of Dispenza-style gratitude.",
+ deeper:"Re-read lessons D7 and N3 side by side."},
+
+{id:"b2",p:"B",t:"Meditation vs SATS",skill:"Two doors into the same state",unlock:5,
+ cards:[
+  ["Dispenza's door","Deep meditation: drop body, place and time, slow the analytical mind, then create from that open state."],
+  ["Neville's door","SATS: the drowsy edge of sleep, where effort fades and the critical mind quietens."],
+  ["The common ground","Both aim to get past the analytical, critical mind, where the old self lives, so a new idea can take hold."],
+  ["Different routes","Dispenza trains the state deliberately while awake. Neville uses a state everyone passes through naturally each night."],
+  ["Use both","Morning: meditate as Dispenza teaches. Night: fall asleep in a Neville scene."]
+ ],
+ qs:[
+  ["What do meditation and SATS have in common?",["Both get past the critical, analytical mind","Both require an hour","Both happen while dreaming"],0,"Both quieten the analytical mind."],
+  ["SATS happens…",["At the drowsy edge of sleep","During exercise","On waking only"],0,"The state just before sleep."],
+  ["A combined routine could be…",["Meditate in the morning, a SATS scene at night","Neither","SATS during work"],0,"Two doors, morning and night."]
+ ],
+ live:"Tonight, try one SATS scene. Tomorrow morning, a 3-minute Dispenza-style sit.",
+ deeper:"Re-read lessons D5 and N4 side by side."},
+
+{id:"b3",p:"B",t:"Why neither wants you hunting for proof",skill:"Stay in the end",unlock:5,
+ cards:[
+  ["Dispenza","Checking 'is it working?' drags you back into analysis and lack: the old personality."],
+  ["Neville","Looking to the senses for confirmation means you've stepped out of the end and back into the old state."],
+  ["The shared logic","In both systems, the state is the cause. Hunting for evidence means you've switched states."],
+  ["What to do instead","Return to the state. Dispenza: elevated emotion. Neville: thinking from the end. Same move."],
+  ["Paradox","Both teach that results come when you stop needing them, because inwardly it's already done."]
+ ],
+ qs:[
+  ["Why do both warn against hunting for proof?",["It means you've switched back to the old state","Proof is bad luck","It's rude"],0,"Checking = old state."],
+  ["The right response to doubt is…",["Return to the state","Look harder for signs","Give up"],0,"Return, every time."],
+  ["Results tend to come, in both teachings, when…",["You stop needing them","You check daily","You tell everyone"],0,"Inwardly, it's already done."]
+ ],
+ live:"Today, every time you catch yourself checking for signs, return to the feeling instead.",
+ deeper:"Re-read lessons D9 and N7 side by side."}
 ];
 
-const PRACTICES = [
- {id:"arrive",t:"Arrive",d:"Settle into the present",steps:[
-  ["Sit comfortably and close your eyes. Let your breath slow down on its own.",25],
-  ["Feel the weight of your body. Notice where it touches the chair or floor.",25],
-  ["Now move your attention to the space around your body. The room. The air.",30],
-  ["Let go of thinking about time. There's nowhere to be. Just this moment.",30],
-  ["Rest here. When thoughts come, notice them and return to the space.",30]]},
- {id:"heart",t:"Heart Breath",d:"Slow breath, elevated feeling",steps:[
-  ["Place attention on the centre of your chest.",15],
-  ["Breathe in slowly for 5… and out for 5. Imagine the breath moving through your heart.",35],
-  ["Keep the rhythm. Now recall something you genuinely appreciate.",35],
-  ["Let the feeling of appreciation grow and fill your chest as you breathe.",35]]},
- {id:"oldself",t:"Name the Old Self",d:"Notice what you're ready to release",steps:[
-  ["Close your eyes. Ask: what emotion have I been living in lately?",30],
-  ["Name it simply: frustration, worry, guilt, lack. Don't judge it.",25],
-  ["Notice how it shows up in your body and how often you return to it.",30],
-  ["Decide: I'm no longer giving this my energy. Breathe out and let it loosen.",35]]},
- {id:"future",t:"Future Self",d:"Rehearse who you're becoming",steps:[
-  ["Settle your breath. Bring to mind one clear intention.",25],
-  ["See yourself as the person who already has it. How do you stand? How do you speak?",40],
-  ["Walk through a normal day as that self. What do you choose differently?",40],
-  ["Now feel it: the gratitude, the ease, the joy of it already being done.",40],
-  ["Let go of how it will happen. Open your eyes as this person.",35]]},
- {id:"gratitude",t:"Gratitude in Advance",d:"Feel it before it arrives",steps:[
-  ["Think of three things you want to arrive in your life.",25],
-  ["Take the first. Feel thankful as if it's already here.",30],
-  ["The second. Let gratitude rise, as if you've already received it.",30],
-  ["The third. Thank you, already done.",30]]}
-];
-
-/* Verified links only: official channel or established interview hosts */
-const VIDEOS = [
+</script>
+<script>
+const VIDEOS=[
  {id:"Iqbm0w-XxGQ",t:"How to Keep Your Vision of the Future Alive",s:"Official channel",d:"Holding on to the future self between meditations."},
  {id:"PdhDiJw8Q_8",t:"How to Tune In to New Possibilities",s:"Official channel",d:"Opening up to outcomes beyond what you can predict."},
  {id:"IT8fsKBgrfE",t:"Believe in Yourself — And Watch What Happens",s:"Official channel",d:"Belief, identity and becoming someone new."},
  {id:"K1FWEHIgNZE",t:"The 7-Day Experiment That Changed the Lives of 1,800 People",s:"Jay Shetty Podcast",d:"Long-form interview on his workshops and method."},
  {id:"uFblepQKYqU",t:"The Invisible Forces Keeping You Addicted, Tired & Behind in Life",s:"Dr Rangan Chatterjee",d:"Long-form interview on habits, emotions and the body."}
 ];
-
-/* ---------- Storage (per device) ---------- */
-const KEY="becoming_v1";
-function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
-let S=Object.assign({seen:[],prac:{},pracCount:0,days:[],best:0},load());
-
-const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
-const dkey=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-function markActive(){const t=today();if(!S.days.includes(t)){S.days.push(t)}const s=streak();if(s>S.best)S.best=s;save();refresh()}
-function streak(){
-  const set=new Set(S.days);let d=new Date(),n=0;
-  if(!set.has(dkey(d)))d.setDate(d.getDate()-1);
-  while(set.has(dkey(d))){n++;d.setDate(d.getDate()-1)}
-  return n;
-}
-
-/* ---------- Feed ---------- */
-const feed=document.getElementById("feed");
-function buildFeed(){
-  const unseen=CARDS.map((c,i)=>i).filter(i=>!S.seen.includes(i));
-  const seen=CARDS.map((c,i)=>i).filter(i=>S.seen.includes(i));
-  const order=[...unseen,...seen];
-  feed.innerHTML="";
-  order.forEach((i,pos)=>{
-    const c=CARDS[i];const el=document.createElement("div");el.className="slide";el.dataset.i=i;
-    el.innerHTML=`<div class="card"><span class="tag">${c.c}</span><h2>${c.t}</h2><p>${c.b}</p><div class="try"><b>Try this</b>${c.y}</div><div class="counter">${pos+1} / ${CARDS.length}</div></div>${pos===0?'<div class="hint">Swipe up ↑</div>':''}`;
-    feed.appendChild(el);
-  });
-  const end=document.createElement("div");end.className="slide done-slide";
-  end.innerHTML=`<div class="card"><h2>That's the deck.</h2><p>Now put it into practice. A few minutes is enough.</p><button class="btn gold" style="align-self:center" onclick="go('practice')">Go to practice</button></div>`;
-  feed.appendChild(end);
-  const io=new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting&&e.intersectionRatio>.6){const i=+e.target.dataset.i;
-      if(!isNaN(i)&&!S.seen.includes(i)){S.seen.push(i);markActive()}}
-  }),{root:feed,threshold:[.6]});
-  feed.querySelectorAll(".slide[data-i]").forEach(s=>io.observe(s));
-}
-
-/* ---------- Practice list ---------- */
-function buildPractices(){
-  const t=today();
-  document.getElementById("pList").innerHTML=PRACTICES.map(p=>{
-    const mins=Math.round(p.steps.reduce((a,s)=>a+s[1],0)/60);
-    const done=(S.prac[p.id]||[]).includes(t);
-    return `<button class="p-item" data-p="${p.id}"><div><h3>${p.t}</h3><span>${p.d}</span></div><div class="min">${done?'<span class="tick">✓ today</span>':mins+' min'}</div></button>`;
-  }).join("");
-  document.querySelectorAll(".p-item").forEach(b=>b.onclick=()=>openP(b.dataset.p));
-}
-
-/* ---------- Player ---------- */
-let P=null,si=0,left=0,total=0,timer=null,paused=false;
 const $=id=>document.getElementById(id);
-function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
-let actx=null;
-function chime(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();
-  o.type="sine";o.frequency.value=528;g.gain.setValueAtTime(0,actx.currentTime);g.gain.linearRampToValueAtTime(.15,actx.currentTime+.05);
-  g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+2.2);o.connect(g).connect(actx.destination);o.start();o.stop(actx.currentTime+2.3)}catch(e){}}
-function openP(id){P=PRACTICES.find(p=>p.id===id);si=0;paused=false;$("pPause").textContent="Pause";
-  $("pTitle").textContent=P.t;$("player").classList.add("open");chime();startStep()}
-function startStep(){const s=P.steps[si];left=total=s[1];$("pStep").textContent=s[0];
-  $("pStepNum").textContent=`Step ${si+1} of ${P.steps.length}`;$("pNext").textContent=si===P.steps.length-1?"Finish":"Next";tick();
-  clearInterval(timer);timer=setInterval(()=>{if(paused)return;left--;tick();if(left<=0)next()},1000)}
-function tick(){$("pTime").textContent=fmt(Math.max(left,0));$("arc").style.strokeDashoffset=578*(left/total)}
-function next(){if(si<P.steps.length-1){si++;chime();startStep()}else finish()}
-function finish(){clearInterval(timer);chime();const t=today();S.prac[P.id]=S.prac[P.id]||[];
-  if(!S.prac[P.id].includes(t)){S.prac[P.id].push(t)}S.pracCount++;markActive();
-  $("pStep").textContent="Complete. Carry this state into your day.";$("pStepNum").textContent="";$("pTime").textContent="✓";
-  $("arc").style.strokeDashoffset=0;$("pNext").textContent="Done";$("pNext").onclick=closeP;$("pPause").style.display="none"}
-function closeP(){clearInterval(timer);$("player").classList.remove("open");$("pNext").onclick=next;$("pPause").style.display="";buildPractices()}
-$("pNext").onclick=next;$("closeP").onclick=closeP;
-$("pPause").onclick=()=>{paused=!paused;$("pPause").textContent=paused?"Resume":"Pause"};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-/* ---------- Watch ---------- */
-function buildVideos(){
-  S.vids=S.vids||[];
-  $("vList").innerHTML=VIDEOS.map(v=>`<button class="v-item" data-id="${v.id}">
-    <div class="v-thumb" style="background-image:url('https://i.ytimg.com/vi/${v.id}/hqdefault.jpg')"><div class="v-play"></div></div>
-    <div class="v-body"><div class="src">${v.s}</div><h3>${v.t}</h3><p>${v.d}</p>${S.vids.includes(v.id)?'<div class="v-watched">✓ Watched</div>':''}</div></button>`).join("");
-  document.querySelectorAll(".v-item").forEach(b=>b.onclick=()=>openV(b.dataset.id));
-}
-function openV(id){
-  $("vFrameWrap").innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
-  $("vExt").href="https://www.youtube.com/watch?v="+id;$("vModal").classList.add("open");
-  S.vids=S.vids||[];if(!S.vids.includes(id)){S.vids.push(id)}markActive();
-}
-$("vClose").onclick=()=>{$("vFrameWrap").innerHTML="";$("vModal").classList.remove("open");buildVideos()};
+/* ---------- State ---------- */
+const KEY="becoming_v2";
+const blank=()=>({done:{},q:{},days:[],best:0,vids:[],sess:null});
+let S;try{S=Object.assign(blank(),JSON.parse(localStorage.getItem(KEY))||{})}catch(e){S=blank()}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const dkey=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const today=()=>dkey(new Date());
+const addDays=n=>{const d=new Date();d.setDate(d.getDate()+n);return dkey(d)};
+function streak(){const set=new Set(S.days);let d=new Date(),n=0;if(!set.has(dkey(d)))d.setDate(d.getDate()-1);while(set.has(dkey(d))){n++;d.setDate(d.getDate()-1)}return n}
+function markActive(){if(!S.days.includes(today()))S.days.push(today());S.best=Math.max(S.best,streak());save();$("pill").textContent="🔥 "+streak()}
 
-/* ---------- Progress ---------- */
-function refresh(){
-  const s=streak();$("pill").textContent=s+" day streak";$("sStreak").textContent=s;
-  $("sCards").textContent=S.seen.length;$("sPrac").textContent=S.pracCount;$("sBest").textContent=Math.max(S.best,s);
-  const set=new Set(S.days);let html="";
-  for(let k=13;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);html+=`<div class="day ${set.has(dkey(d))?'on':''}">${d.getDate()}</div>`}
-  $("days").innerHTML=html;
+/* ---------- Lessons & unlocking ---------- */
+const byPath=p=>LESSONS.filter(l=>l.p===p);
+const doneCount=p=>byPath(p).filter(l=>S.done[l.id]).length;
+function unlocked(l){
+  if(l.p==="B")return doneCount("D")>=l.unlock&&doneCount("N")>=l.unlock&&byPath("B").slice(0,byPath("B").indexOf(l)).every(x=>S.done[x.id]);
+  const list=byPath(l.p);return list.slice(0,list.indexOf(l)).every(x=>S.done[x.id]);
 }
-$("resetBtn").onclick=()=>{if(confirm("Reset all progress on this device?")){S={seen:[],prac:{},pracCount:0,days:[],best:0};save();buildFeed();buildPractices();refresh()}};
+const nextIn=p=>byPath(p).find(l=>!S.done[l.id]&&unlocked(l));
+function nextLesson(){
+  const c=["D","N","B"].map(p=>nextIn(p)).filter(Boolean);
+  if(!c.length)return null;
+  c.sort((a,b)=>doneCount(a.p)-doneCount(b.p)||(a.p==="B"?-1:0));
+  return c[0];
+}
+/* ---------- Spaced repetition (Leitner) ---------- */
+const GAP=[0,1,3,7,14,30];
+const qid=(l,i)=>l.id+":"+i;
+function grade(id,ok){const r=S.q[id]||{b:0};r.b=ok?Math.min(r.b+1,5):1;r.due=addDays(ok?GAP[r.b]:1);S.q[id]=r;save()}
+function dueList(){const t=today();return Object.entries(S.q).filter(([k,v])=>v.due<=t).sort((a,b)=>a[1].due<b[1].due?-1:1).map(([k])=>k)}
+const qById=id=>{const [lid,i]=id.split(":");const l=LESSONS.find(x=>x.id===lid);return l?{l,q:l.qs[+i]}:null};
+function mastery(p){const ls=byPath(p);let tot=0,got=0;ls.forEach(l=>l.qs.forEach((q,i)=>{tot+=5;got+=(S.q[qid(l,i)]||{b:0}).b}));return tot?Math.round(got/tot*100):0}
 
-/* ---------- Nav ---------- */
+/* ---------- Session ---------- */
+let steps=[],si=0,curLesson=null,answered=false;
+function buildSteps(lesson,reviewOnly){
+  const st=[];
+  if(lesson){
+    lesson.cards.forEach(c=>st.push({k:"card",l:lesson,h:c[0],b:c[1]}));
+    lesson.qs.forEach((q,i)=>st.push({k:"q",id:qid(lesson,i),fresh:true}));
+  }
+  dueList().filter(id=>!lesson||!id.startsWith(lesson.id+":")).slice(0,reviewOnly?10:3).forEach(id=>st.push({k:"q",id}));
+  if(lesson)st.push({k:"live",l:lesson});
+  st.push({k:"end",l:lesson});
+  return st;
+}
+function startSession(mode,lid){
+  curLesson=mode==="review"?null:(lid?LESSONS.find(l=>l.id===lid):nextLesson());
+  if(mode==="reread"){steps=curLesson.cards.map(c=>({k:"card",l:curLesson,h:c[0],b:c[1]}));steps.push({k:"end",l:curLesson,reread:true})}
+  else steps=buildSteps(curLesson,mode==="review");
+  si=0;
+  if(mode==="new"&&S.sess&&S.sess.lid===curLesson.id&&S.sess.date===today())si=Math.min(S.sess.si,steps.length-1);
+  $("S").classList.add("open");render();
+}
+function closeSession(){$("S").classList.remove("open");renderToday()}
+function render(){
+  const s=steps[si];answered=false;$("sBar").style.width=(si/(steps.length-1))*100+"%";
+  const B=$("sBody"),N=$("sNext");N.disabled=false;N.textContent="Continue";
+  if(curLesson&&s.k!=="end"&&!steps[steps.length-1].reread){S.sess={lid:curLesson.id,si,date:today()};save()}
+  if(s.k==="card"){
+    const p=PATHS[s.l.p];
+    B.innerHTML=`<div class="kind" style="color:${p.col}">${p.name} · ${esc(s.l.t)}</div><h2>${esc(s.h)}</h2><p class="txt">${esc(s.b)}</p>`;
+  }else if(s.k==="q"){
+    const {l,q}=qById(s.id);const p=PATHS[l.p];
+    const opts=q[1].map((t,i)=>({t,ok:i===q[2]})).sort(()=>Math.random()-.5);
+    B.innerHTML=`<div class="kind" style="color:${p.col}">${s.fresh?"Check":"Review"} · ${p.name}</div><div class="q">${esc(q[0])}</div>`+
+      opts.map((o,i)=>`<button class="opt" data-ok="${o.ok?1:0}">${esc(o.t)}</button>`).join("")+`<div class="why" id="why"></div>`;
+    N.disabled=true;N.textContent="Choose an answer";
+    B.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      if(answered)return;answered=true;const ok=b.dataset.ok==="1";
+      B.querySelectorAll(".opt").forEach(x=>{if(x.dataset.ok==="1")x.classList.add("right")});if(!ok)b.classList.add("wrong");
+      $("why").innerHTML=`<b>${ok?"Correct.":"Not quite."}</b> ${esc(q[3])}`;
+      grade(s.id,ok);N.disabled=false;N.textContent="Continue";
+    });
+  }else if(s.k==="live"){
+    B.innerHTML=`<div class="kind">Live it today</div><h2>${esc(s.l.live)}</h2><div class="deeper"><b>Go deeper:</b> ${esc(s.l.deeper)}</div>`;
+  }else{
+    let msg;
+    if(s.reread)msg="Lesson reviewed.";
+    else if(s.l){S.done[s.l.id]=S.done[s.l.id]||today();S.sess=null;msg="Lesson complete."}
+    else msg="Reviews done.";
+    markActive();save();
+    const nl=nextLesson();
+    B.innerHTML=`<div class="big-done"><div class="ring">✦</div><h2>${msg}</h2><p class="txt">${s.l&&!s.reread?esc(s.l.skill)+".":"Memory strengthened."}</p></div>`;
+    N.textContent="Done";
+    if(nl&&!s.reread){B.innerHTML+=`<button class="btn full" style="margin-top:22px" id="more">Keep going: ${esc(nl.t)}</button>`;$("more").onclick=()=>startSession("new")}
+  }
+}
+$("sNext").onclick=()=>{if(si<steps.length-1){si++;render()}else closeSession()};
+$("sX").onclick=closeSession;
+
+/* ---------- Views ---------- */
+function renderToday(){
+  const nl=nextLesson(),due=dueList().length,t=today();
+  const doneToday=Object.values(S.done).includes(t);
+  const latest=LESSONS.filter(l=>S.done[l.id]).sort((a,b)=>S.done[a.id]<S.done[b.id]?1:-1)[0];
+  let h=`<h1>Today</h1><p class="sub">${doneToday?"Today's lesson is done. Reviews or another lesson if you've got time.":"About 3 minutes. One lesson, a few reviews."}</p>`;
+  if(nl){const p=PATHS[nl.p];const resume=S.sess&&S.sess.lid===nl.id&&S.sess.date===t&&S.sess.si>0;
+    h+=`<div class="hero"><span class="tag" style="color:${p.col};background:${p.col}22">${p.name}</span><h2>${esc(nl.t)}</h2><p>${esc(nl.skill)}</p>
+    <div class="plan"><div>New lesson<span>${nl.cards.length} cards · ${nl.qs.length} checks</span></div><div>Review<span>${Math.min(due,3)} due</span></div><div>Live it<span>1 prompt</span></div></div>
+    <button class="btn gold full" id="go">${resume?"Resume":doneToday?"Do another lesson":"Start session"}</button></div>`;}
+  else h+=`<div class="hero"><h2>All lessons complete</h2><p>Keep your reviews going. That's what makes it stick.</p></div>`;
+  if(due>0)h+=`<button class="btn full" id="rev" style="margin-bottom:14px">Review only (${due} due)</button>`;
+  if(latest)h+=`<div class="live"><b>Live it today</b>${esc(latest.live)}</div>`;
+  $("todayWrap").innerHTML=h;
+  if($("go"))$("go").onclick=()=>startSession("new");
+  if($("rev"))$("rev").onclick=()=>startSession("review");
+  $("pill").textContent="🔥 "+streak();
+}
+function renderPaths(){
+  const nl=nextLesson();
+  $("pathsWrap").innerHTML=["D","N","B"].map(p=>{const P=PATHS[p];const ls=byPath(p);
+    return `<div class="path-h"><div><h3>${P.name}</h3><small>${P.sub}</small></div><small>${doneCount(p)}/${ls.length}</small></div>
+    <div class="bar"><i style="width:${mastery(p)}%;background:${P.col}"></i></div>`+
+    ls.map((l,i)=>{const d=S.done[l.id],u=unlocked(l),n=nl&&nl.id===l.id;
+      const cls=d?"done":n?"next":!u?"locked":"";
+      const note=p==="B"&&!u&&!d?`Unlocks after ${l.unlock} lessons in both paths`:esc(l.skill);
+      return `<button class="l-item ${cls}" data-id="${l.id}" ${!d&&!u?"disabled":""}><div class="l-num">${d?"✓":(p==="B"?"B":"")+(i+1)}</div><div><h4>${esc(l.t)}</h4><p>${note}</p></div></button>`}).join("")}).join("");
+  document.querySelectorAll(".l-item").forEach(b=>b.onclick=()=>{const id=b.dataset.id;
+    if(S.done[id])startSession("reread",id);else if(unlocked(LESSONS.find(l=>l.id===id)))startSession("new",id)});
+}
+function renderWatch(){
+  $("vList").innerHTML=VIDEOS.map(v=>`<button class="v-item" data-id="${v.id}"><div class="v-thumb" style="background-image:url('https://i.ytimg.com/vi/${v.id}/hqdefault.jpg')"><div class="v-play"></div></div>
+  <div class="v-body"><div class="src">${v.s}</div><h3>${esc(v.t)}</h3><p>${esc(v.d)}</p>${S.vids.includes(v.id)?'<div class="v-watched">✓ Watched</div>':''}</div></button>`).join("");
+  document.querySelectorAll(".v-item").forEach(b=>b.onclick=()=>{const id=b.dataset.id;
+    $("vFrameWrap").innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+    $("vExt").href="https://www.youtube.com/watch?v="+id;$("vModal").classList.add("open");if(!S.vids.includes(id))S.vids.push(id);markActive()});
+}
+$("vClose").onclick=()=>{$("vFrameWrap").innerHTML="";$("vModal").classList.remove("open");renderWatch()};
+function renderProgress(){
+  $("sStreak").textContent=streak();$("sLessons").textContent=Object.keys(S.done).length;$("sDue").textContent=dueList().length;$("sBest").textContent=Math.max(S.best,streak());
+  $("mastery").innerHTML=["D","N","B"].map(p=>`<div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px"><span>${PATHS[p].name}</span><span style="color:var(--muted)">${mastery(p)}%</span></div><div class="bar"><i style="width:${mastery(p)}%;background:${PATHS[p].col}"></i></div>`).join("");
+  const set=new Set(S.days);let h="";for(let k=13;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);h+=`<div class="day ${set.has(dkey(d))?"on":""}">${d.getDate()}</div>`}$("days").innerHTML=h;
+}
+$("resetBtn").onclick=()=>{if(confirm("Reset all progress on this device?")){S=blank();save();renderProgress();renderToday()}};
 function go(v){document.querySelectorAll(".view").forEach(x=>x.classList.toggle("active",x.id==="v-"+v));
   document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.v===v));
-  if(v==="practice")buildPractices();if(v==="progress")refresh();if(v==="watch")buildVideos()}
+  ({today:renderToday,paths:renderPaths,watch:renderWatch,progress:renderProgress})[v]()}
 document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>go(b.dataset.v));
-
-buildFeed();buildPractices();refresh();
+renderToday();
 </script>
 </body>
 </html>
