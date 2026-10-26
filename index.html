@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f0d1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Becoming">
+<title>Becoming</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0d1a; --bg2:#17142a; --card:#1d1934; --line:#2c2750;
+  --text:#ece8f6; --muted:#9c96b8; --gold:#e8c27a; --gold-soft:rgba(232,194,122,.14);
+  --violet:#8e7bd8; --nav-h:64px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow:hidden}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+/* Views */
+.view{position:absolute;inset:0 0 calc(var(--nav-h) + env(safe-area-inset-bottom)) 0;display:none}
+.view.active{display:block}
+
+/* Feed */
+#feed{height:100%;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none}
+#feed::-webkit-scrollbar{display:none}
+.slide{height:100%;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;padding:24px 20px;
+  background:radial-gradient(120% 80% at 50% 0%, var(--bg2) 0%, var(--bg) 70%)}
+.card{width:100%;max-width:440px;display:flex;flex-direction:column;gap:20px}
+.tag{align-self:flex-start;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:var(--gold-soft);padding:6px 10px;border-radius:99px}
+.card h2{font-size:clamp(28px,8vw,38px);line-height:1.15}
+.card p{font-size:17px;line-height:1.6;color:#d6d1e8}
+.try{border-left:2px solid var(--gold);padding:10px 14px;background:rgba(255,255,255,.03);border-radius:0 10px 10px 0;font-size:15px;line-height:1.5;color:var(--text)}
+.try b{color:var(--gold);font-weight:600;display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.counter{font-size:13px;color:var(--muted)}
+.hint{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:12px;color:var(--muted);opacity:.7;pointer-events:none}
+.done-slide h2{text-align:center}.done-slide p{text-align:center}
+
+/* Practice list */
+.pad{height:100%;overflow-y:auto;padding:28px 20px 40px}
+.wrap{max-width:480px;margin:0 auto}
+.pad h1{font-size:30px;margin-bottom:6px}
+.sub{color:var(--muted);font-size:15px;margin-bottom:22px;line-height:1.5}
+.p-item{width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.p-item h3{font-size:19px;margin-bottom:4px}
+.p-item span{font-size:14px;color:var(--muted)}
+.p-item .min{color:var(--gold);font-size:13px;white-space:nowrap}
+.p-item .tick{color:var(--gold)}
+
+/* Player */
+#player{position:fixed;inset:0;background:var(--bg);z-index:20;display:none;flex-direction:column;align-items:center;justify-content:center;padding:28px 24px calc(28px + env(safe-area-inset-bottom))}
+#player.open{display:flex}
+#closeP{position:absolute;top:calc(16px + env(safe-area-inset-top));right:16px;font-size:26px;color:var(--muted);padding:8px}
+.ring{position:relative;width:200px;height:200px;margin-bottom:28px}
+.ring svg{transform:rotate(-90deg)}
+.ring .t{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Fraunces,serif;font-size:40px}
+.orb{position:absolute;inset:40px;border-radius:50%;background:radial-gradient(circle,var(--gold-soft),transparent 70%);animation:breathe 10s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(.8);opacity:.5}50%{transform:scale(1.15);opacity:1}}
+#pTitle{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+#pStep{font-size:20px;line-height:1.55;text-align:center;max-width:420px;min-height:7.5em;font-family:Fraunces,serif;font-weight:400}
+#pStepNum{color:var(--muted);font-size:13px;margin:14px 0 24px}
+.ctrls{display:flex;gap:12px}
+.btn{padding:14px 26px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-weight:500}
+.btn.gold{background:var(--gold);color:#1a1530;border-color:var(--gold)}
+
+/* Progress */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 10px;text-align:center}
+.stat b{display:block;font-family:Fraunces,serif;font-size:30px;color:var(--gold)}
+.stat span{font-size:12px;color:var(--muted)}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:10px 0 24px}
+.day{aspect-ratio:1;border-radius:8px;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted)}
+.day.on{background:var(--gold);color:#1a1530;border-color:var(--gold);font-weight:600}
+.label{font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.reset{margin-top:28px;font-size:13px;color:var(--muted);text-decoration:underline}
+
+/* Nav */
+nav{position:fixed;left:0;right:0;bottom:0;height:calc(var(--nav-h) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:rgba(15,13,26,.92);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;z-index:10}
+nav button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:12px;color:var(--muted)}
+nav button.active{color:var(--gold)}
+nav svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
+.streak-pill{position:fixed;top:calc(12px + env(safe-area-inset-top));right:14px;z-index:5;background:rgba(29,25,52,.85);border:1px solid var(--line);border-radius:99px;padding:6px 12px;font-size:13px;color:var(--gold)}
+</style>
+</head>
+<body>
+
+<div class="streak-pill" id="pill">0 day streak</div>
+
+<section class="view active" id="v-learn"><div id="feed"></div></section>
+
+<section class="view" id="v-practice"><div class="pad"><div class="wrap">
+  <h1>Practice</h1>
+  <p class="sub">Short sessions to shift your state. Find somewhere quiet and let the timer guide you.</p>
+  <div id="pList"></div>
+</div></div></section>
+
+<section class="view" id="v-progress"><div class="pad"><div class="wrap">
+  <h1>Progress</h1>
+  <p class="sub">Small daily reps beat occasional big sessions.</p>
+  <div class="stat-row">
+    <div class="stat"><b id="sStreak">0</b><span>Day streak</span></div>
+    <div class="stat"><b id="sCards">0</b><span>Ideas learned</span></div>
+    <div class="stat"><b id="sPrac">0</b><span>Practices done</span></div>
+  </div>
+  <div class="label">Last 14 days</div>
+  <div class="days" id="days"></div>
+  <div class="label">Best streak: <span id="sBest">0</span> days</div>
+  <button class="reset" id="resetBtn">Reset my progress</button>
+</div></div></section>
+
+<div id="player">
+  <button id="closeP" aria-label="Close">×</button>
+  <div id="pTitle"></div>
+  <div class="ring">
+    <div class="orb"></div>
+    <svg width="200" height="200"><circle cx="100" cy="100" r="92" stroke="#2c2750" stroke-width="4" fill="none"/>
+      <circle id="arc" cx="100" cy="100" r="92" stroke="#e8c27a" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="578" stroke-dashoffset="578"/></svg>
+    <div class="t" id="pTime">0:00</div>
+  </div>
+  <div id="pStep"></div>
+  <div id="pStepNum"></div>
+  <div class="ctrls"><button class="btn" id="pPause">Pause</button><button class="btn gold" id="pNext">Next</button></div>
+</div>
+
+<nav>
+  <button class="active" data-v="learn"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M9 8h6M9 12h6"/></svg>Learn</button>
+  <button data-v="practice"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>Practice</button>
+  <button data-v="progress"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Progress</button>
+</nav>
+
+<script>
+/* ---------- Content (written in our own words, summarising ideas) ---------- */
+const CARDS = [
+ {c:"Foundations",t:"Inner pattern, outer life",b:"A central idea in Dispenza's work: the way you habitually think, act and feel shapes the life you keep experiencing. Change the inner pattern and the outer life has room to change with it.",y:"Name one thought you've had every single day this week."},
+ {c:"Foundations",t:"Most of today is a rerun",b:"Same thoughts lead to the same choices. Same choices lead to the same behaviours, the same experiences and the same emotions, which then produce the same thoughts again. Most days are a repeat of yesterday.",y:"What part of today was identical to yesterday?"},
+ {c:"Foundations",t:"The thinking–feeling loop",b:"A thought creates a feeling. The feeling then prompts more thoughts that match it. Round and round. Breaking the loop starts with catching it while it's running.",y:"Next time you feel low, ask: what thought came just before this?"},
+ {c:"Emotion",t:"Living in the past",b:"Every time you relive an old hurt, the body responds as if it's happening now. Feel the same past emotions every day and, in a sense, you keep living in the past.",y:"Which old event do you replay most often?"},
+ {c:"Emotion",t:"Memorised emotions",b:"Feel an emotion for a few hours and it's a mood. Keep it for weeks and it's a temperament. Hold it for years and it becomes part of your personality. You end up identifying with a feeling you only learned.",y:"Finish this sentence honestly: 'I'm the kind of person who always feels…'"},
+ {c:"Body",t:"The body learns the program",b:"Repeat an emotional state often enough and the body learns it so well it runs automatically, before you've consciously chosen anything. That's why change can feel physically uncomfortable.",y:"Notice one reaction today that happened before you 'decided' it."},
+ {c:"Body",t:"Survival mode",b:"Under stress, attention narrows onto three things: your body, your surroundings and time. It's great for emergencies and terrible as a way of living, because it keeps you focused on what could go wrong.",y:"Right now, which of the three is grabbing your attention most?"},
+ {c:"Body",t:"Beyond body, place and time",b:"In his meditations, the aim is to let go of thinking about your body, where you are and what time it is. As attention moves away from the familiar, you stop rehearsing the old self.",y:"Close your eyes for 30 seconds and notice the space around you instead of your body."},
+ {c:"Mind",t:"The present is the doorway",b:"The past is memory and the future you predict is usually built from that memory. Only in the present moment can you choose something genuinely new.",y:"Feel your feet on the floor. That's the present. Start there."},
+ {c:"Mind",t:"Step into the unknown",b:"The familiar feels safe even when it's bad for you. Real change means stepping into uncertainty. Discomfort is often a sign you're leaving the old self, not a sign that something's wrong.",y:"What feels uncomfortable about the change you want?"},
+ {c:"Mind",t:"Watch for the old self",b:"You can't change a pattern you can't see. Becoming aware of how you usually think, speak and react is the first step. Self-observation is the work.",y:"Pick one habit to simply observe today. Don't try to fix it."},
+ {c:"Mind",t:"Wire together, fire together",b:"An idea from neuroscience: nerve cells that are repeatedly activated together form stronger connections. Repeat a thought often enough and it becomes a groove the mind falls into easily.",y:"What groove do you want to carve deeper?"},
+ {c:"Mind",t:"Prune the old, grow the new",b:"Connections you stop using tend to weaken. Every time you decline the old reaction, you're starving that circuit and feeding a new one.",y:"Choose one old reaction you'll decline today."},
+ {c:"Future Self",t:"Who are you becoming?",b:"Before you meditate, get specific. How does your future self think? How do they act and respond under pressure? How do they feel when they wake up? Vague intentions produce vague change.",y:"Write three words that describe your future self."},
+ {c:"Future Self",t:"Mental rehearsal",b:"Research on mental practice, often from sport, suggests that vividly imagining an action can prime the brain for it. Rehearse the new you in your mind and the brain starts to treat it as familiar.",y:"Picture yourself handling tomorrow's hardest moment as your future self."},
+ {c:"Future Self",t:"Thought plus feeling",b:"A clear intention is half of it. The other half is feeling the emotion of it now. In his teaching, thought without feeling barely moves anything. Together they form a new state of being.",y:"Think of your goal. Now find the feeling you'd have if it were done."},
+ {c:"Future Self",t:"Feel it before it happens",b:"We usually wait for something good to happen before we feel grateful or joyful. This practice reverses that: feel the elevated emotion first, as though it has already happened.",y:"Spend 60 seconds feeling as if your intention has already arrived."},
+ {c:"Emotion",t:"Gratitude as receiving",b:"Gratitude is the emotion that naturally follows receiving something. Feeling it in advance tells you, and your body, that you've already received.",y:"Say 'thank you' for something that hasn't happened yet."},
+ {c:"Practice",t:"Heart and breath",b:"Slow, steady breathing combined with a warm feeling like appreciation is linked in research to a more even heart rhythm, often called coherence. It's a simple way into a calmer, elevated state.",y:"Breathe in for 5, out for 5, with your attention on your chest."},
+ {c:"Practice",t:"Slowing the busy mind",b:"Everyday thinking runs fast and analytical. In meditation, brain activity tends to slow, the inner critic gets quieter, and it becomes easier to take on a new idea of yourself.",y:"Try three slow breaths before your next scroll."},
+ {c:"Practice",t:"Let go of the how",b:"Trying to control how something arrives is often the old self's anxiety in disguise. Set the intention, feel it, then release the details. Outcomes often show up in unexpected ways.",y:"Notice where you're trying to force a 'how'."},
+ {c:"Practice",t:"Don't hunt for proof",b:"Constantly checking whether it's working pulls you back into analysis and doubt, the old state. Keep the state; let the evidence come when it comes.",y:"Today, practise without checking for results."},
+ {c:"Practice",t:"Get up as the new self",b:"Meditation is the rehearsal and the day is the performance. The real test is whether you can carry that elevated state into the first conversation, the first email, the first frustration.",y:"Choose one moment today to deliberately act as your future self."},
+ {c:"Practice",t:"Small daily reps",b:"Change comes from consistency more than intensity. A few minutes every day trains the mind and body far better than an occasional big session.",y:"Keep your streak alive: one card and one practice a day."}
+];
+
+const PRACTICES = [
+ {id:"arrive",t:"Arrive",d:"Settle into the present",steps:[
+  ["Sit comfortably and close your eyes. Let your breath slow down on its own.",25],
+  ["Feel the weight of your body. Notice where it touches the chair or floor.",25],
+  ["Now move your attention to the space around your body. The room. The air.",30],
+  ["Let go of thinking about time. There's nowhere to be. Just this moment.",30],
+  ["Rest here. When thoughts come, notice them and return to the space.",30]]},
+ {id:"heart",t:"Heart Breath",d:"Slow breath, elevated feeling",steps:[
+  ["Place attention on the centre of your chest.",15],
+  ["Breathe in slowly for 5… and out for 5. Imagine the breath moving through your heart.",35],
+  ["Keep the rhythm. Now recall something you genuinely appreciate.",35],
+  ["Let the feeling of appreciation grow and fill your chest as you breathe.",35]]},
+ {id:"oldself",t:"Name the Old Self",d:"Notice what you're ready to release",steps:[
+  ["Close your eyes. Ask: what emotion have I been living in lately?",30],
+  ["Name it simply: frustration, worry, guilt, lack. Don't judge it.",25],
+  ["Notice how it shows up in your body and how often you return to it.",30],
+  ["Decide: I'm no longer giving this my energy. Breathe out and let it loosen.",35]]},
+ {id:"future",t:"Future Self",d:"Rehearse who you're becoming",steps:[
+  ["Settle your breath. Bring to mind one clear intention.",25],
+  ["See yourself as the person who already has it. How do you stand? How do you speak?",40],
+  ["Walk through a normal day as that self. What do you choose differently?",40],
+  ["Now feel it: the gratitude, the ease, the joy of it already being done.",40],
+  ["Let go of how it will happen. Open your eyes as this person.",35]]},
+ {id:"gratitude",t:"Gratitude in Advance",d:"Feel it before it arrives",steps:[
+  ["Think of three things you want to arrive in your life.",25],
+  ["Take the first. Feel thankful as if it's already here.",30],
+  ["The second. Let gratitude rise, as if you've already received it.",30],
+  ["The third. Thank you, already done.",30]]}
+];
+
+/* ---------- Storage (per device) ---------- */
+const KEY="becoming_v1";
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+let S=Object.assign({seen:[],prac:{},pracCount:0,days:[],best:0},load());
+
+const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const dkey=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+function markActive(){const t=today();if(!S.days.includes(t)){S.days.push(t)}const s=streak();if(s>S.best)S.best=s;save();refresh()}
+function streak(){
+  const set=new Set(S.days);let d=new Date(),n=0;
+  if(!set.has(dkey(d)))d.setDate(d.getDate()-1);
+  while(set.has(dkey(d))){n++;d.setDate(d.getDate()-1)}
+  return n;
+}
+
+/* ---------- Feed ---------- */
+const feed=document.getElementById("feed");
+function buildFeed(){
+  const unseen=CARDS.map((c,i)=>i).filter(i=>!S.seen.includes(i));
+  const seen=CARDS.map((c,i)=>i).filter(i=>S.seen.includes(i));
+  const order=[...unseen,...seen];
+  feed.innerHTML="";
+  order.forEach((i,pos)=>{
+    const c=CARDS[i];const el=document.createElement("div");el.className="slide";el.dataset.i=i;
+    el.innerHTML=`<div class="card"><span class="tag">${c.c}</span><h2>${c.t}</h2><p>${c.b}</p><div class="try"><b>Try this</b>${c.y}</div><div class="counter">${pos+1} / ${CARDS.length}</div></div>${pos===0?'<div class="hint">Swipe up ↑</div>':''}`;
+    feed.appendChild(el);
+  });
+  const end=document.createElement("div");end.className="slide done-slide";
+  end.innerHTML=`<div class="card"><h2>That's the deck.</h2><p>Now put it into practice. A few minutes is enough.</p><button class="btn gold" style="align-self:center" onclick="go('practice')">Go to practice</button></div>`;
+  feed.appendChild(end);
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting&&e.intersectionRatio>.6){const i=+e.target.dataset.i;
+      if(!isNaN(i)&&!S.seen.includes(i)){S.seen.push(i);markActive()}}
+  }),{root:feed,threshold:[.6]});
+  feed.querySelectorAll(".slide[data-i]").forEach(s=>io.observe(s));
+}
+
+/* ---------- Practice list ---------- */
+function buildPractices(){
+  const t=today();
+  document.getElementById("pList").innerHTML=PRACTICES.map(p=>{
+    const mins=Math.round(p.steps.reduce((a,s)=>a+s[1],0)/60);
+    const done=(S.prac[p.id]||[]).includes(t);
+    return `<button class="p-item" data-p="${p.id}"><div><h3>${p.t}</h3><span>${p.d}</span></div><div class="min">${done?'<span class="tick">✓ today</span>':mins+' min'}</div></button>`;
+  }).join("");
+  document.querySelectorAll(".p-item").forEach(b=>b.onclick=()=>openP(b.dataset.p));
+}
+
+/* ---------- Player ---------- */
+let P=null,si=0,left=0,total=0,timer=null,paused=false;
+const $=id=>document.getElementById(id);
+function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+let actx=null;
+function chime(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();
+  o.type="sine";o.frequency.value=528;g.gain.setValueAtTime(0,actx.currentTime);g.gain.linearRampToValueAtTime(.15,actx.currentTime+.05);
+  g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+2.2);o.connect(g).connect(actx.destination);o.start();o.stop(actx.currentTime+2.3)}catch(e){}}
+function openP(id){P=PRACTICES.find(p=>p.id===id);si=0;paused=false;$("pPause").textContent="Pause";
+  $("pTitle").textContent=P.t;$("player").classList.add("open");chime();startStep()}
+function startStep(){const s=P.steps[si];left=total=s[1];$("pStep").textContent=s[0];
+  $("pStepNum").textContent=`Step ${si+1} of ${P.steps.length}`;$("pNext").textContent=si===P.steps.length-1?"Finish":"Next";tick();
+  clearInterval(timer);timer=setInterval(()=>{if(paused)return;left--;tick();if(left<=0)next()},1000)}
+function tick(){$("pTime").textContent=fmt(Math.max(left,0));$("arc").style.strokeDashoffset=578*(left/total)}
+function next(){if(si<P.steps.length-1){si++;chime();startStep()}else finish()}
+function finish(){clearInterval(timer);chime();const t=today();S.prac[P.id]=S.prac[P.id]||[];
+  if(!S.prac[P.id].includes(t)){S.prac[P.id].push(t)}S.pracCount++;markActive();
+  $("pStep").textContent="Complete. Carry this state into your day.";$("pStepNum").textContent="";$("pTime").textContent="✓";
+  $("arc").style.strokeDashoffset=0;$("pNext").textContent="Done";$("pNext").onclick=closeP;$("pPause").style.display="none"}
+function closeP(){clearInterval(timer);$("player").classList.remove("open");$("pNext").onclick=next;$("pPause").style.display="";buildPractices()}
+$("pNext").onclick=next;$("closeP").onclick=closeP;
+$("pPause").onclick=()=>{paused=!paused;$("pPause").textContent=paused?"Resume":"Pause"};
+
+/* ---------- Progress ---------- */
+function refresh(){
+  const s=streak();$("pill").textContent=s+" day streak";$("sStreak").textContent=s;
+  $("sCards").textContent=S.seen.length;$("sPrac").textContent=S.pracCount;$("sBest").textContent=Math.max(S.best,s);
+  const set=new Set(S.days);let html="";
+  for(let k=13;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);html+=`<div class="day ${set.has(dkey(d))?'on':''}">${d.getDate()}</div>`}
+  $("days").innerHTML=html;
+}
+$("resetBtn").onclick=()=>{if(confirm("Reset all progress on this device?")){S={seen:[],prac:{},pracCount:0,days:[],best:0};save();buildFeed();buildPractices();refresh()}};
+
+/* ---------- Nav ---------- */
+function go(v){document.querySelectorAll(".view").forEach(x=>x.classList.toggle("active",x.id==="v-"+v));
+  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.v===v));
+  if(v==="practice")buildPractices();if(v==="progress")refresh()}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>go(b.dataset.v));
+
+buildFeed();buildPractices();refresh();
+</script>
+</body>
+</html>
