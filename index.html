@@ -76,6 +76,9 @@ a{color:var(--gold)}
 .s-foot .btn:disabled{opacity:.35}
 .deeper{margin-top:18px;font-size:14px;color:var(--muted);line-height:1.5}
 .deeper b{color:var(--gold);font-weight:500}
+.srcs{margin-top:20px;display:flex;flex-direction:column;gap:8px}
+.srcs-h{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.srcs a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);text-decoration:none;font-size:15px}
 .big-done{text-align:center}
 .big-done .ring{font-size:56px;margin-bottom:10px}
 
@@ -165,150 +168,176 @@ const PATHS = {
 };
 
 const LESSONS = [
-/* ================= DISPENZA ================= */
-{id:"d1",p:"D",t:"You are a habit",skill:"Spot the loop running on autopilot",
+/* ================= DISPENZA — verified against drjoedispenza.com blog ================= */
+{id:"d1",p:"D",t:"You are a habit",skill:"See how much of you runs on autopilot",
  cards:[
-  ["The 95% idea","Dispenza often says that by middle age, most of who we are runs on a set of memorised programs. Thoughts, reactions, behaviours, feelings, all running automatically."],
-  ["The loop","Same thoughts lead to the same choices. Same choices lead to the same actions. Same actions create the same experiences, which produce the same emotions. And those emotions drive the same thoughts again."],
-  ["Why it matters","If the loop runs unchanged, tomorrow is a rerun of today. A new future can't come from the same personality that made your current reality."],
-  ["The key reframe","Your personality creates your personal reality. To change the reality, change the personality: how you think, act and feel."],
-  ["Where it starts","You can't change a loop you can't see. Step one is noticing it while it's running, without judging it."]
+  ["Mostly automatic","Dr Joe teaches that by around age 35, roughly 90–95% of who we are is stored in a subconscious memory system: habits, reactions and emotional patterns that run without us choosing them."],
+  ["Think, act, feel","He defines your personality as how you think, how you act and how you feel. Repeat the same three every day and you stay the same person."],
+  ["Personality → reality","His key line: your personality creates your personal reality. To change your life, you change how you think, act and feel."],
+  ["Emotion is the end product","He describes an emotion as the end product of an experience. Relive the same experiences and you keep producing the same feelings, which keep the cycle going."],
+  ["Step one: awareness","Every version of his method starts with noticing your automatic patterns, like a curious bystander, without judgement or blame."]
  ],
  qs:[
-  ["In the loop, what do the same emotions lead back to?",["The same thoughts","New experiences","Better choices"],0,"Emotions drive matching thoughts, which closes the loop."],
-  ["According to Dispenza, what creates your personal reality?",["Your personality","Your luck","Your environment alone"],0,"Personality (how you think, act and feel) creates personal reality."],
-  ["What's the first step in breaking the loop?",["Noticing it while it runs","Forcing positive thoughts","Changing your job"],0,"Awareness comes first. You can't change what you can't see."]
+  ["Roughly how much of who we are is automatic by about 35, according to Dr Joe?",["90–95%","About half","10–20%"],0,"He places it at around 90–95%, stored in a subconscious memory system."],
+  ["Dr Joe defines personality as…",["How you think, act and feel","Your genes","What others think of you"],0,"Think, act, feel: change those and you change your personal reality."],
+  ["How should you observe your patterns?",["Like a curious bystander, without judgement","Harshly, to motivate change","Only when things go wrong"],0,"Non-judgemental observation is step one."]
  ],
- live:"Catch one moment today where you reacted exactly as you always do. Just notice it.",
- deeper:"Breaking the Habit of Being Yourself — the opening chapters on personality and personal reality."},
+ live:"Catch one moment today where you reacted exactly as you always do. Observe it like a curious bystander.",
+ deeper:"Breaking the Habit of Being Yourself.",
+ src:[["Back to Basics","https://drjoedispenza.com/dr-joes-blog/back-to-basics"],["The Art of Change","https://drjoedispenza.com/dr-joes-blog/the-art-of-change"]]},
 
-{id:"d2",p:"D",t:"Memorised emotions",skill:"Notice when a feeling has become your identity",
+{id:"d2",p:"D",t:"Stuck in an emotion",skill:"Feel emotions fully, without living in them",
  cards:[
-  ["Feeling as a chemical","In his teaching, every emotion is a chemical signal that tells the body what the mind has decided. Feel it often enough and the body starts expecting it."],
-  ["Mood, temperament, personality","A feeling that lasts hours is a mood. Kept for weeks, it becomes a temperament. Held for years, it becomes a personality trait."],
-  ["The body becomes the mind","Repeat an emotion long enough and the body learns it so well it runs it automatically. The body has, in his phrase, become the mind."],
-  ["Addicted to the familiar","The body can crave its familiar emotions, even painful ones. You'll unconsciously find thoughts and situations that reproduce them."],
-  ["The tell","When you say 'I've always been this way', that's often a memorised emotion talking, not a fixed fact about you."]
+  ["Emotions aren't the enemy","Dr Joe is clear: reacting emotionally is normal, and grief or hurt need to be felt to be processed. He's not asking you to suppress anything."],
+  ["The real problem","The problem is staying in the emotion long after the event has passed. Keep recycling it and you stay anchored to the past."],
+  ["Memory = same chemistry","Each time you recall a painful event, he says, the brain and body produce the same chemistry as the original experience. The body relives it."],
+  ["The body learns it","Repeat that enough and the body, which he treats as the unconscious mind, gets conditioned to respond automatically. With fear, he says, the body becomes the mind of fear."],
+  ["Anything can trigger it","A thought, a memory, an image or a real event can all act as the trigger that restarts the same emotional response."]
  ],
  qs:[
-  ["A feeling held for years becomes…",["A personality trait","A mood","A temperament"],0,"Mood (hours) → temperament (weeks) → personality trait (years)."],
-  ["What does 'the body becomes the mind' mean?",["The body runs the emotion automatically","You think with your body","Exercise improves thinking"],0,"The body has memorised the state and runs it without conscious choice."],
-  ["Why might someone keep recreating a painful feeling?",["The body craves the familiar emotion","They enjoy pain","It's genetic"],0,"Familiar emotional chemistry feels like 'me', even when it hurts."]
+  ["Does Dr Joe teach suppressing difficult emotions?",["No: feel them to process them","Yes: avoid negative emotions","Only grief should be felt"],0,"He says emotions need to be felt. The problem is staying in them."],
+  ["What happens when you keep recalling a painful event?",["The body produces the same chemistry as the original","The memory fades faster","Nothing physical"],0,"Recall recreates the original chemistry, so the body relives it."],
+  ["Which can trigger the conditioned emotional response?",["A thought, memory, image or real event","Only real events","Only other people"],0,"Any of these can restart the cycle."]
  ],
- live:"Finish this honestly: 'I'm the kind of person who always feels…' That's your memorised emotion.",
- deeper:"Breaking the Habit of Being Yourself — chapters on the body as the unconscious mind."},
+ live:"Next time an old feeling flares, feel it fully, then ask: is this about now, or the past?",
+ deeper:"Breaking the Habit of Being Yourself.",
+ src:[["Emotions Are Not Your Enemy: Part I","https://drjoedispenza.com/dr-joes-blog/emotions-are-not-your-enemy-part-i"],["The Anatomy of Anxiety","https://drjoedispenza.com/dr-joes-blog/the-anatomy-of-anxiety"]]},
 
-{id:"d3",p:"D",t:"Survival mode",skill:"Recognise stress narrowing your world",
+{id:"d3",p:"D",t:"Survival mode",skill:"Recognise when you're living in emergency",
  cards:[
-  ["Built for emergencies","The stress response evolved for short threats. It narrows attention and floods the body with energy to fight or flee."],
-  ["The three things","In survival mode, attention locks onto three things: your body, your environment and time. That means 'Am I OK? What's happening around me? How long have I got?'"],
-  ["The problem","Most modern stress never switches off. Living in that state keeps you focused on what could go wrong, and keeps you predictable."],
-  ["Materialist mode","When you're consumed by body, things and time, you're trying to change matter with matter. He says that's the hardest way to create anything."],
-  ["The way out","Change starts by withdrawing attention from those three things, which is exactly what his meditation trains."]
+  ["Healthy stress","Anxiety and stress are normal, healthy responses to a real threat. Afterwards the body is meant to return to balance."],
+  ["A state of emergency","Dr Joe describes living in survival mode as living in a state of emergency: the stress response switched on when there's no real danger."],
+  ["The body can't tell","Imagining a feared future can trigger the same physical reaction as the real thing. The body doesn't distinguish between the two."],
+  ["Narrow focus","Under stress, attention narrows onto your body, people, things, places and time. He calls this narrow or convergent focus."],
+  ["Survival vs elevated","He contrasts survival emotions (fear, anger, resentment) with elevated emotions (love, joy, gratitude). Survival emotions keep you predictable and block new possibilities."]
  ],
  qs:[
-  ["Survival mode narrows attention to which three things?",["Body, environment, time","Past, present, future","Mind, heart, gut"],0,"Body, environment and time: the 'three bigs' of stress."],
-  ["Why is chronic survival mode a problem for change?",["It keeps you focused on what could go wrong","It makes you too relaxed","It improves focus"],0,"It locks you into predictable, threat-focused patterns."],
-  ["What's the way out, according to Dispenza?",["Withdrawing attention from body, environment and time","Working harder","Avoiding all stress"],0,"Taking attention off the three bigs is the core of his meditation."]
+  ["Dr Joe describes living in survival mode as…",["Living in a state of emergency","Being efficient","Being highly creative"],0,"The emergency response, switched on without a real threat."],
+  ["Why can worrying about the future be so draining?",["The body reacts as if it's really happening","It's good practice","It isn't"],0,"The body doesn't distinguish imagined from real."],
+  ["Which are 'survival emotions' in his teaching?",["Fear, anger, resentment","Love, joy, gratitude","Curiosity, awe, wonder"],0,"Survival emotions versus elevated emotions."]
  ],
- live:"Next time you're stressed, ask: which of the three has my attention: body, place or time?",
- deeper:"Breaking the Habit of Being Yourself — chapters on stress and survival."},
+ live:"Next time you feel stressed, ask: is there a real threat right now, or am I rehearsing one?",
+ deeper:"Breaking the Habit of Being Yourself; Becoming Supernatural.",
+ src:[["The Anatomy of Anxiety","https://drjoedispenza.com/dr-joes-blog/the-anatomy-of-anxiety"],["A Day in No Time","https://drjoedispenza.com/dr-joes-blog/a-day-in-no-time"]]},
 
-{id:"d4",p:"D",t:"The present moment",skill:"Use the present as the only place change can happen",
+{id:"d4",p:"D",t:"The generous present moment",skill:"Use the present as the doorway out of the known",
  cards:[
-  ["Predictable past, predictable future","Most of us live in the past (memory) or the future (predictions built from memory). Either way, we're living in the known."],
-  ["The generous present","Dispenza calls the present moment generous because it's the only place where new possibilities exist. Everything else is a rerun."],
-  ["Why it's hard","The body is used to anticipating the future and reliving the past. Settling into now can feel uncomfortable, and that's normal."],
-  ["The skill","Every time attention drifts to a familiar worry or memory, you notice and come back. Each return is one rep."],
-  ["The payoff","When you're truly present, you're no longer reaffirming the old self. That's when something new has room to show up."]
+  ["The box","Dr Joe describes a 'box': the familiar world of your senses, your body, your surroundings and time. Your problems live in that box, held there by the same thoughts and feelings."],
+  ["The generous present moment","He calls the present moment, the 'eternal now', generous, because it's where you can step out of the known and into new possibility."],
+  ["Why slow down","Pausing into the present signals to the nervous system that it's safe to relax and take in something new."],
+  ["Expect discomfort","Stepping into the unknown feels uncomfortable. He says to expect it. Discomfort is part of change, not a sign it's failing."],
+  ["The future arrives as now","He points out that your future always shows up as a present moment. Change isn't somewhere else. It's here."]
  ],
  qs:[
-  ["Why does Dispenza call the present moment 'generous'?",["It's where new possibilities exist","It lasts longer","It feels nice"],0,"Only the present holds the unknown, meaning new possibilities."],
-  ["Predicting the future usually relies on…",["Memories of the past","Pure imagination","Intuition"],0,"Predictions are built from memory, so they keep you in the known."],
-  ["What counts as 'one rep' of this skill?",["Noticing drift and returning to now","Meditating for an hour","Never thinking of the past"],0,"Each return to the present is the training."]
+  ["What is Dr Joe's 'box'?",["The known: senses, body, surroundings and time","A meditation cushion","Your house"],0,"The familiar 3D world where problems are held in place."],
+  ["Why does he call the present moment 'generous'?",["It's where you can step into new possibility","It's relaxing","It lasts forever"],0,"The doorway out of the known."],
+  ["Feeling uncomfortable as you move into the unknown means…",["It's a normal part of change","You're doing it wrong","You should stop"],0,"Expect the discomfort."]
  ],
- live:"Three times today, stop and feel your feet. That's the present moment.",
- deeper:"Becoming Supernatural — the chapter on the present moment."},
+ live:"Three times today, pause and feel this moment, and notice what your 'box' is made of right now.",
+ deeper:"Becoming Supernatural.",
+ src:[["Change Your Box, Change Your Reality: Part II","https://drjoedispenza.com/dr-joes-blog/change-your-box-change-your-reality-part-ii"],["Four Steps to Change","https://drjoedispenza.com/dr-joes-blog/four-steps-to-change-1"]]},
 
-{id:"d5",p:"D",t:"Becoming no one",skill:"Understand what you're letting go of in meditation",
+{id:"d5",p:"D",t:"Becoming no one",skill:"Understand what you let go of in meditation",
  cards:[
-  ["The phrase","In his meditations he invites you to become no body, no one, no thing, nowhere, in no time. It sounds strange, but it's precise."],
-  ["What it means","You stop identifying with your body, your name and roles, your possessions, your location and your schedule. All the things that define the old self."],
-  ["Why do it","While you're being somebody, you keep reaffirming that somebody. Drop the identity for a while and the old program isn't being fed."],
-  ["Pure awareness","What's left is awareness itself. From there, he teaches, you're free to create a new self rather than repeat the old one."],
-  ["Practically","It's not forcing a blank mind. It's repeatedly moving attention off the familiar and into space, darkness and openness."]
+  ["The phrase","In his meditations, the aim is to become no body, no one, no thing, nowhere, in no time."],
+  ["What it means","You withdraw attention from everything that defines the known self: your body, identity, possessions, location and the time."],
+  ["Narrow to open","Day to day we use narrow focus on matter. In meditation he teaches a wide, open (divergent) focus that moves attention from matter to energy."],
+  ["Why do it","While you're being the old somebody, you keep reaffirming them. Moving beyond the self is where he says new possibility opens up."],
+  ["Practically","It isn't forcing a blank mind. Each time attention snaps back to the body or a thought, you gently open it out again."]
  ],
  qs:[
-  ["'Becoming no one' means dropping identification with…",["Your name, roles and self-image","Your breath","Your goals forever"],0,"You let go of everything that defines the old self, temporarily."],
-  ["Why let go of the identity during meditation?",["So the old self isn't being reaffirmed","To forget your life","To fall asleep"],0,"Being 'somebody' keeps feeding that somebody's program."],
-  ["What's the practical skill?",["Moving attention off the familiar into space","Forcing a blank mind","Thinking hard about goals"],0,"Gently redirecting attention, not forcing emptiness."]
+  ["Complete his phrase: no body, no one, no thing, nowhere…",["…in no time","…no breath","…no thoughts"],0,"No body, no one, no thing, nowhere, in no time."],
+  ["In meditation, he moves attention from…",["Matter to energy, with open focus","Energy to matter","The heart to the head"],0,"From narrow focus on matter to open focus on energy."],
+  ["What do you do when attention snaps back to the body?",["Gently open it out again","Start over","Force the mind blank"],0,"Gentle redirection. Every return is the practice."]
  ],
- live:"For 60 seconds, put your attention on the space around your body instead of your body.",
- deeper:"Breaking the Habit of Being Yourself — the step-by-step meditation weeks; Becoming Supernatural."},
+ live:"For 60 seconds, put your attention on the space around you rather than on your body.",
+ deeper:"Breaking the Habit of Being Yourself; Becoming Supernatural.",
+ src:[["A Day in No Time","https://drjoedispenza.com/dr-joes-blog/a-day-in-no-time"],["Change Your Box, Change Your Reality: Part II","https://drjoedispenza.com/dr-joes-blog/change-your-box-change-your-reality-part-ii"]]},
 
-{id:"d6",p:"D",t:"Mental rehearsal",skill:"Build a future self the brain treats as familiar",
+{id:"d6",p:"D",t:"Mental rehearsal",skill:"Install the new self before the moment arrives",
  cards:[
-  ["Neurons that fire together","A well-known idea in neuroscience: nerve cells that repeatedly activate together strengthen their connections. Repetition carves grooves."],
-  ["Rehearsal works","Studies of mental practice, often in sport and music, show that vividly imagining an action can change the brain in ways similar to doing it."],
-  ["Install the future","Dispenza applies this to identity. Rehearse how your future self thinks, acts and feels, and the brain starts treating that self as familiar."],
-  ["Be specific","Vague goals create vague rehearsal. Who is this person? How do they respond to a hard email? How do they walk into a room?"],
-  ["The brain ahead of the event","The aim is for your brain to look like the future has already happened, so when the moment comes you act from that self automatically."]
+  ["Fire together, wire together","Dr Joe leans on a core neuroscience idea: neurons that fire together wire together. What you repeat gets hardwired, and what you stop using gets pruned."],
+  ["Rehearse first","Thinking through a new response before the real situation builds the circuitry in advance. His example: decide how you'll forgive someone before you meet them."],
+  ["Thinking, doing, being","Learning moves through three stages: understanding it (thinking), demonstrating it (doing), then it becoming automatic (being)."],
+  ["Knowledge isn't enough","Reading and talking about ideas without living them is just philosophy, he says. The body has to learn what the mind understands."],
+  ["The body believes it","He teaches that the body doesn't know the difference between a real experience and an emotion created by thought alone. That's why rehearsal works."]
  ],
  qs:[
-  ["'Neurons that fire together…'",["…wire together","…tire together","…expire together"],0,"Repeated co-activation strengthens connections."],
-  ["What does mental rehearsal aim to do?",["Make the future self familiar to the brain","Predict the future","Replace action entirely"],0,"Rehearsal installs the circuitry ahead of the experience."],
-  ["What makes rehearsal effective?",["Specific detail of thoughts, actions and feelings","Saying the goal fast","Doing it once"],0,"Specific, repeated, detailed rehearsal."]
+  ["What are the three stages of learning he describes?",["Thinking, doing, being","Reading, writing, speaking","Wanting, trying, getting"],0,"Thinking → doing → being."],
+  ["His example of mental rehearsal:",["Deciding how you'll forgive someone before you meet them","Visualising money","Practising a speech aloud"],0,"Rehearse the new response before the experience."],
+  ["Reading ideas without embodying them is, he says…",["Just philosophy","Enough to change","Harmful"],0,"The body has to learn what the mind understands."]
  ],
  live:"Pick one moment coming up today. Rehearse it for 30 seconds as your future self.",
- deeper:"Evolve Your Brain; Breaking the Habit of Being Yourself — chapters on mental rehearsal."},
+ deeper:"Evolve Your Brain; Breaking the Habit of Being Yourself.",
+ src:[["The Art of Change","https://drjoedispenza.com/dr-joes-blog/the-art-of-change"],["Conditioning the Body to a New Future","https://drjoedispenza.com/dr-joes-blog/conditioning-the-body-to-a-new-future"]]},
 
-{id:"d7",p:"D",t:"Elevated emotion",skill:"Feel the outcome before it arrives",
+{id:"d7",p:"D",t:"Elevated emotion",skill:"Feel the future before it arrives",
  cards:[
-  ["Thought plus feeling","He teaches that a clear intention (thought) plus an elevated emotion (feeling) together create a new state of being. Either alone is weak."],
-  ["The usual order","Normally we wait for something to happen, then feel grateful. That keeps feelings dependent on circumstances."],
-  ["Reverse the order","Feel gratitude, joy or wholeness first, as if the outcome has already happened. The body responds to the emotion as though it's real."],
-  ["Why gratitude","Gratitude is the emotion that follows receiving. Feeling it in advance tells you, and your body, that it's already done."],
-  ["Wholeness, not lack","Trying to manifest from lack ('I need this') reinforces lack. Feeling whole first changes where you're creating from."]
+  ["Intention + emotion","Dr Joe teaches combining a clear intention with the emotions of that future, rehearsed before it happens. Together they form a new state of being."],
+  ["Elevated emotions","Love, joy and gratitude are his elevated emotions, the opposite of the survival emotions of fear, anger and resentment."],
+  ["Gratitude = receiving","He describes gratitude as the ultimate state of receiving. Feeling it first prepares you to receive."],
+  ["Ahead of the environment","Feeling the emotion before the event, he says, signals the body ahead of the environment, instead of waiting for life to make you feel good."],
+  ["A real example","He tells of a student who cultivated gratitude long before her healing, rather than waiting for the healing to feel grateful."]
  ],
  qs:[
-  ["A new state of being comes from…",["Clear intention plus elevated emotion","Intention alone","Emotion alone"],0,"Thought and feeling together."],
-  ["Why is gratitude especially useful?",["It's the feeling that follows receiving","It's the easiest emotion","It cancels stress"],0,"Feeling it first signals the outcome has already arrived."],
-  ["Creating from lack tends to…",["Reinforce lack","Speed things up","Be neutral"],0,"Lack is the old state, so wholeness comes first."]
+  ["Which emotion does he call the ultimate state of receiving?",["Gratitude","Excitement","Calm"],0,"Gratitude prepares you to receive."],
+  ["Feeling the emotion before the event signals the body…",["Ahead of the environment","After the fact","Nothing"],0,"You lead with the feeling instead of waiting for circumstances."],
+  ["A new state of being comes from…",["Intention plus the emotions of the future","Intention alone","Hard work alone"],0,"Clear intention plus elevated emotion."]
  ],
  live:"Spend 60 seconds feeling grateful for something that hasn't happened yet.",
- deeper:"Becoming Supernatural; Breaking the Habit of Being Yourself."},
+ deeper:"Becoming Supernatural; You Are the Placebo.",
+ src:[["The Transformational Power of Gratitude","https://drjoedispenza.com/dr-joes-blog/the-transformational-power-of-gratitude"],["Back to Basics","https://drjoedispenza.com/dr-joes-blog/back-to-basics"]]},
 
-{id:"d8",p:"D",t:"Heart coherence",skill:"Use breath and the heart to reach an elevated state",
+{id:"d8",p:"D",t:"Heart coherence",skill:"Use the heart to get out of survival",
  cards:[
-  ["What coherence is","When breathing is slow and steady, and you hold a warm emotion like appreciation, heart rhythm becomes smooth and orderly. Researchers call this heart coherence."],
-  ["The practice","Place attention on the centre of the chest. Breathe slowly, as if through the heart. Then cultivate an elevated emotion."],
-  ["Why it helps","It's a direct, physical route into the elevated state from the last lesson, instead of trying to think your way there."],
-  ["His framing","Dispenza teaches the heart as a gateway to a unified, connected state, and uses coherence heavily in his meditations."],
-  ["Honest note","Slow breathing and positive emotion having calming effects is well supported. His larger claims about the heart are his teaching. Hold them as such."]
+  ["What it is","Dr Joe describes heart coherence as the heart and brain falling into a synchronised rhythm, in a relaxed, open, heart-centred state."],
+  ["Attention is energy","His principle: where you place your attention is where you place your energy. So the practice begins by placing attention in the heart."],
+  ["Breathe and feel","Keep breathing through the heart area while holding an elevated emotion. He calls the heart a creative centre."],
+  ["Safe to create","He says a coherent heart signals to the brain that it's safe, and safe to move out of survival mode into creativity and awareness."],
+  ["Honest note","These claims come from his team's own measurements at retreats. The articles don't give full study detail, so hold the bigger claims as his teaching."]
  ],
  qs:[
-  ["Heart coherence involves slow breathing plus…",["An elevated emotion like appreciation","Holding your breath","Fast breathing"],0,"Steady breath plus a warm emotion."],
-  ["Where do you place attention?",["The centre of the chest","The forehead","The feet"],0,"Attention on the heart area."],
-  ["Why use the heart practice?",["It's a physical route into an elevated state","It replaces sleep","It stops thoughts permanently"],0,"Body-first access to the feeling."]
+  ["'Where you place your attention is…'",["…where you place your energy","…what you forget","…irrelevant"],0,"His core principle for heart work."],
+  ["What does heart coherence signal to the brain, per Dr Joe?",["It's safe to create, out of survival","Time to sleep","Danger"],0,"Safety, so you can move out of survival mode."],
+  ["The practice combines heart-focused attention, breathing and…",["An elevated emotion","Counting numbers","Holding the breath"],0,"Attention, breath and an elevated emotion."]
  ],
- live:"Before your next meal, do five slow breaths with attention on your chest.",
- deeper:"Becoming Supernatural — chapters on the heart."},
+ live:"Before your next meal, put your attention in your chest and breathe there for five breaths, feeling appreciation.",
+ deeper:"Becoming Supernatural.",
+ src:[["The Heart and the Brain Tango","https://drjoedispenza.com/dr-joes-blog/the-heart-and-the-brain-tango"]]},
 
-{id:"d9",p:"D",t:"Living as the new self",skill:"Carry the state into the day",
+{id:"d9",p:"D",t:"Intention and surrender",skill:"Set it, then let go of the how",
  cards:[
-  ["Meditation is rehearsal","Sitting is practice. The day is the performance. The test is whether you can stay as the new self when life pokes you."],
-  ["Don't hunt for proof","Constantly checking 'is it working?' pulls you back into analysis, doubt and lack. That's the old self."],
-  ["Expect it unexpectedly","He teaches that outcomes often show up in ways you couldn't predict. Trying to control the how is the old self's anxiety."],
-  ["When you slip","You'll fall back into old reactions. Notice, don't punish, and return. Each return strengthens the new circuit."],
-  ["Consistency","Small daily reps beat occasional big sessions. The new self gets familiar through repetition."]
+  ["Two jobs","Dr Joe splits creating into two jobs. Intention is the brain's job: get clear on the outcome and imagine it."],
+  ["Surrender","Surrender is the heart's job: trust it will happen, without forcing it or predicting how."],
+  ["No idea how or when","He's explicit that we don't know how or when it will happen. Trying harder and forcing is the old way of creating."],
+  ["Signposts","Synchronicities, serendipities and opportunities show up as signposts, on their own schedule, not yours."],
+  ["Stop hunting","Searching for proof after you meditate is, he says, where people lose their way. Once you're connected, you stop looking for it."]
  ],
  qs:[
-  ["What does hunting for proof do?",["Pulls you back into doubt and lack","Speeds results","Builds faith"],0,"Checking is analysis: the old state."],
-  ["How should you respond to slipping into old reactions?",["Notice, don't punish, return","Start over from scratch","Ignore it"],0,"Each return is a rep for the new self."],
-  ["Outcomes, in his teaching, tend to come…",["In unexpected ways","Exactly as planned","Never"],0,"Let go of controlling the how."]
+  ["In Dr Joe's model, surrender is the job of…",["The heart","The brain","Other people"],0,"Intention = brain; surrender = heart."],
+  ["What does he say about hunting for proof?",["It's where people lose their way","It speeds things up","It's essential"],0,"Once connected, you stop looking."],
+  ["How do results tend to show up, in his teaching?",["As synchronicities and opportunities, on their own schedule","Exactly as planned","On a set date"],0,"Signposts, not a timetable."]
  ],
- live:"Choose one moment today to deliberately act as your future self.",
- deeper:"Breaking the Habit of Being Yourself — the closing chapters on demonstrating the new self."},
+ live:"Today, every time you catch yourself checking for signs, return to the feeling instead.",
+ deeper:"Becoming Supernatural.",
+ src:[["Investing in the Unknown, Part II: Intention and Surrender","https://drjoedispenza.com/dr-joes-blog/investing-in-the-unknown-part-ii-intention-and-surrender"]]},
+
+{id:"d10",p:"D",t:"The four steps to change",skill:"A loop you can run every day",
+ cards:[
+  ["Step 1: Become aware","Notice your automatic thoughts, behaviours and feelings, and what triggers them. Be a curious bystander, not a critic."],
+  ["Step 2: Pause and unplug","Slow down into the present moment. It tells the nervous system it's safe to relax and take in something new. Expect some discomfort."],
+  ["Step 3: Shift your energy","Take actions that match your intention, and let the emotions of the person you're becoming build the new state of being."],
+  ["Step 4: Return with awareness","Go back into daily life awake to your patterns. The body will resist change. That's expected."],
+  ["It's a circle","The steps aren't a one-off. You cycle through them again and again, and each lap makes the new self more familiar."]
+ ],
+ qs:[
+  ["What's step one?",["Become aware of your automatic patterns","Visualise your goal","Meditate for an hour"],0,"Awareness, as a curious bystander."],
+  ["Step two, pausing into the present, signals…",["It's safe to relax and take in something new","Danger","Time to work harder"],0,"Safety for the nervous system."],
+  ["The four steps are…",["Circular: repeated again and again","A one-time process","Optional extras"],0,"A loop, not a line."]
+ ],
+ live:"Run all four steps once today on one small habit: notice, pause, shift, return.",
+ deeper:"Breaking the Habit of Being Yourself.",
+ src:[["Four Steps to Change","https://drjoedispenza.com/dr-joes-blog/four-steps-to-change-1"]]},
 
 /* ================= NEVILLE ================= */
 {id:"n1",p:"N",t:"Imagination creates reality",skill:"Grasp Neville's central claim",
@@ -429,12 +458,12 @@ const LESSONS = [
   ["Dispenza","Intention plus elevated emotion creates a new state of being. Feel it before it happens."],
   ["Neville","Feeling is the secret. Feel the reality of the wish fulfilled, and what's impressed gets expressed."],
   ["Same idea?","Both say the thought alone isn't enough. The feeling of it being done is what does the work."],
-  ["The difference","Dispenza leads with elevated emotions like gratitude, joy and wholeness. Neville leads with the natural feeling of the specific wish being done."],
+  ["The difference","Dispenza leads with elevated emotions like love, joy and gratitude. Neville leads with the natural feeling of the specific wish being done."],
   ["Use both","Use Neville's specific scene to direct the feeling, and Dispenza's gratitude and heart focus to amplify it."]
  ],
  qs:[
   ["What do both teachers agree on?",["The feeling of it being done is essential","Thought alone is enough","Feelings don't matter"],0,"Feeling is central to both."],
-  ["Dispenza's emphasis is on…",["Elevated emotions like gratitude and wholeness","Short sleep scenes","Revision"],0,"General elevated states."],
+  ["Dispenza's emphasis is on…",["Elevated emotions like love, joy and gratitude","Short sleep scenes","Revision"],0,"General elevated states."],
   ["Neville's emphasis is on…",["The natural feeling of the specific wish fulfilled","Heart coherence","Brain waves"],0,"Specific, natural feeling."]
  ],
  live:"Combine them: a 5-second Neville scene, then 3 heart breaths of Dispenza-style gratitude.",
@@ -442,14 +471,14 @@ const LESSONS = [
 
 {id:"b2",p:"B",t:"Meditation vs SATS",skill:"Two doors into the same state",unlock:5,
  cards:[
-  ["Dispenza's door","Deep meditation: drop body, place and time, slow the analytical mind, then create from that open state."],
+  ["Dispenza's door","Meditation: withdraw attention from body, place and time into open focus, then create from that state."],
   ["Neville's door","SATS: the drowsy edge of sleep, where effort fades and the critical mind quietens."],
-  ["The common ground","Both aim to get past the analytical, critical mind, where the old self lives, so a new idea can take hold."],
+  ["The common ground","Both aim to step out of the familiar, effortful self so a new idea can take hold."],
   ["Different routes","Dispenza trains the state deliberately while awake. Neville uses a state everyone passes through naturally each night."],
   ["Use both","Morning: meditate as Dispenza teaches. Night: fall asleep in a Neville scene."]
  ],
  qs:[
-  ["What do meditation and SATS have in common?",["Both get past the critical, analytical mind","Both require an hour","Both happen while dreaming"],0,"Both quieten the analytical mind."],
+  ["What do meditation and SATS have in common?",["Both step out of the familiar, effortful self","Both require an hour","Both happen while dreaming"],0,"Both quieten the analytical mind."],
   ["SATS happens…",["At the drowsy edge of sleep","During exercise","On waking only"],0,"The state just before sleep."],
   ["A combined routine could be…",["Meditate in the morning, a SATS scene at night","Neither","SATS during work"],0,"Two doors, morning and night."]
  ],
@@ -458,10 +487,10 @@ const LESSONS = [
 
 {id:"b3",p:"B",t:"Why neither wants you hunting for proof",skill:"Stay in the end",unlock:5,
  cards:[
-  ["Dispenza","Checking 'is it working?' drags you back into analysis and lack: the old personality."],
+  ["Dispenza","Hunting for proof after meditating is, he says, where people lose their way."],
   ["Neville","Looking to the senses for confirmation means you've stepped out of the end and back into the old state."],
   ["The shared logic","In both systems, the state is the cause. Hunting for evidence means you've switched states."],
-  ["What to do instead","Return to the state. Dispenza: elevated emotion. Neville: thinking from the end. Same move."],
+  ["What to do instead","Return to the state. Dispenza: elevated emotion and surrender. Neville: thinking from the end. Same move."],
   ["Paradox","Both teach that results come when you stop needing them, because inwardly it's already done."]
  ],
  qs:[
@@ -560,7 +589,7 @@ function render(){
       grade(s.id,ok);N.disabled=false;N.textContent="Continue";
     });
   }else if(s.k==="live"){
-    B.innerHTML=`<div class="kind">Live it today</div><h2>${esc(s.l.live)}</h2><div class="deeper"><b>Go deeper:</b> ${esc(s.l.deeper)}</div>`;
+    B.innerHTML=`<div class="kind">Live it today</div><h2>${esc(s.l.live)}</h2>${srcHtml(s.l)}<div class="deeper"><b>Go deeper:</b> ${esc(s.l.deeper)}</div>`;
   }else{
     let msg;
     if(s.reread)msg="Lesson reviewed.";
@@ -568,11 +597,12 @@ function render(){
     else msg="Reviews done.";
     markActive();save();
     const nl=nextLesson();
-    B.innerHTML=`<div class="big-done"><div class="ring">✦</div><h2>${msg}</h2><p class="txt">${s.l&&!s.reread?esc(s.l.skill)+".":"Memory strengthened."}</p></div>`;
+    B.innerHTML=`<div class="big-done"><div class="ring">✦</div><h2>${msg}</h2><p class="txt">${s.l&&!s.reread?esc(s.l.skill)+".":"Memory strengthened."}</p></div>`+(s.reread&&s.l?srcHtml(s.l):"");
     N.textContent="Done";
     if(nl&&!s.reread){B.innerHTML+=`<button class="btn full" style="margin-top:22px" id="more">Keep going: ${esc(nl.t)}</button>`;$("more").onclick=()=>startSession("new")}
   }
 }
+function srcHtml(l){if(!l.src)return"";return `<div class="srcs"><div class="srcs-h">Read Dr Joe on this</div>`+l.src.map(x=>`<a href="${x[1]}" target="_blank" rel="noopener">${esc(x[0])} ↗</a>`).join("")+`</div>`}
 $("sNext").onclick=()=>{if(si<steps.length-1){si++;render()}else closeSession()};
 $("sX").onclick=closeSession;
 
